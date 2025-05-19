@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceneController">
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutY="86.0" prefHeight="54.0" prefWidth="700.0" text="Welcome to MedAssistant">
+               <font>
+                  <Font name="Consolas Bold" size="27.0" />
+               </font>
+            </Label>
+            <Button layoutX="73.0" layoutY="221.0" mnemonicParsing="false" onAction="#switchToDoctorLoginForm" prefHeight="36.0" prefWidth="123.0" text="Doctor" />
+            <Button layoutX="219.0" layoutY="221.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" text="Admin" />
+            <Button layoutX="363.0" layoutY="221.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" text="Staff" />
+            <Button layoutX="505.0" layoutY="221.0" mnemonicParsing="false" onAction="#switchToPatientSelection" prefHeight="36.0" prefWidth="123.0" text="Patient" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

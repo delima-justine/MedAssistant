@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Scene2Controller">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ccfff" height="102.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" width="607.0" />
+      <Text layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, Doctor!" textAlignment="CENTER" wrappingWidth="600.0">
+         <font>
+            <Font name="Consolas Bold" size="29.0" />
+         </font>
+      </Text>
+      <Label fx:id="emailLabel" alignment="CENTER" layoutY="167.0" prefHeight="42.0" prefWidth="600.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="passwordLabel" alignment="CENTER" layoutY="231.0" prefHeight="42.0" prefWidth="600.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

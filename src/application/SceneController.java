@@ -27,7 +27,7 @@ public class SceneController {
 		root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		stage.setTitle("First Scene");
+		stage.setTitle("MedAssistant");
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();
@@ -73,6 +73,16 @@ public class SceneController {
 		stage.show();
 	}
 	
+	public void switchToAdminLoginForm(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("adminLoginForm.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setTitle("Admin & Staff Login");
+		stage.setScene(scene);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
 	public void login(ActionEvent event) throws IOException{
 		
 		String user_email = emailTextField.getText();
@@ -88,6 +98,7 @@ public class SceneController {
 		scene = new Scene(root);
 		stage.setTitle("First Scene");
 		stage.setScene(scene);
+		stage.centerOnScreen();
 		stage.show();
 	}
 	

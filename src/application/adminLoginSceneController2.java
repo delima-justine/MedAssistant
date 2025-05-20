@@ -11,20 +11,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Scene2Controller {
-	
+public class adminLoginSceneController2 {
+
 	@FXML
-	Label emailLabel;
+	Label adminEmailLabel;
 	@FXML
-	Label passwordLabel;
+	Label adminPasswordLabel;
 	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
-	public void displayName(String email, String password) {
-		emailLabel.setText("Email: " + email);
-		passwordLabel.setText("Password: " + password);
+	public void displayAdminInformation(String email, String password) {
+		adminEmailLabel.setText("Email: " + email);
+		adminPasswordLabel.setText("Password: " + password);
 	}
 	
 	public void switchToScene1(ActionEvent event) throws IOException{

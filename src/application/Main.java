@@ -12,8 +12,9 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("1st Scene");
+			primaryStage.setTitle("MedAssistant");
 			primaryStage.setScene(scene);
+			primaryStage.centerOnScreen();
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

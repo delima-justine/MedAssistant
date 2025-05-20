@@ -11,12 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class doctorLoginSceneController {
+public class adminLoginSceneController {
 	
 	@FXML
-	TextField doctorEmailTextField;
+	TextField adminEmailTextField;
 	@FXML
-	TextField doctorPasswordTextField;
+	TextField adminPasswordTextField;
 	
 	private Stage stage;
 	private Scene scene;
@@ -32,20 +32,21 @@ public class doctorLoginSceneController {
 		stage.show();
 	}
 	
-	public void doctorLogin(ActionEvent event) throws IOException{
+	public void adminLogin(ActionEvent event) throws IOException{
 		
-		String doctor_email = doctorEmailTextField.getText();
-		String doctor_password = doctorPasswordTextField.getText();
+		String admin_email = adminEmailTextField.getText();
+		String admin_password = adminPasswordTextField.getText();
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("doctorDashboard.fxml")); // doctor dashboard
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("adminDashboard.fxml")); // doctor dashboard
 		root = loader.load();
 		
-		doctorLoginSceneController2 doctorLoginSceneController2 = loader.getController();
-		doctorLoginSceneController2.displayDoctorInformation(doctor_email, doctor_password);
+		adminLoginSceneController2 adminLoginSceneController2 = loader.getController();
+		adminLoginSceneController2.displayAdminInformation(admin_email, admin_password);
 		
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		stage.setTitle("Doctor Dashboard");
+		stage.setTitle("Admin & Staff Dashboard");
+		stage.centerOnScreen();
 		stage.setScene(scene);
 		stage.show();
 	}

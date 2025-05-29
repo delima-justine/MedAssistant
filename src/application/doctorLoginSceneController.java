@@ -23,7 +23,7 @@ public class doctorLoginSceneController {
 	private Parent root;
 	
 	public void switchToScene1(ActionEvent event) throws IOException{
-		root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setTitle("MedAssistant");

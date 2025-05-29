@@ -24,7 +24,7 @@ public class SceneController {
 	
 	// METHODS
 	public void switchToScene1(ActionEvent event) throws IOException{
-		root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setTitle("MedAssistant");
@@ -88,7 +88,7 @@ public class SceneController {
 		String user_email = emailTextField.getText();
 		String user_password = passwordTextField.getText();
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("sampleDashboard.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("patientDashboard.fxml"));
 		root = loader.load();
 		
 		Scene2Controller scene2Controller = loader.getController();

@@ -15,6 +15,7 @@ public class Main extends Application {
 			primaryStage.setTitle("MedAssistant");
 			primaryStage.setScene(scene);
 			primaryStage.centerOnScreen();
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

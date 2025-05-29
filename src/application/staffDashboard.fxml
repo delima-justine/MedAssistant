@@ -7,16 +7,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.adminLoginSceneController2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="591.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="154.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
-      <Label fx:id="adminEmailLabel" alignment="CENTER" layoutX="322.0" layoutY="171.0" prefHeight="42.0" prefWidth="395.0">
+      <Label fx:id="staffEmailLabel" alignment="CENTER" layoutX="361.0" layoutY="183.0" prefHeight="42.0" prefWidth="407.0">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="adminPasswordLabel" alignment="CENTER" layoutX="370.0" layoutY="307.0" prefHeight="42.0" prefWidth="352.0">
+      <Label fx:id="staffPasswordLabel" alignment="CENTER" layoutX="343.0" layoutY="303.0" prefHeight="42.0" prefWidth="407.0">
          <font>
             <Font size="22.0" />
          </font>
@@ -25,7 +25,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label layoutX="68.0" layoutY="16.0" prefHeight="38.0" prefWidth="543.0" text="Admin Dashboard" textFill="WHITE">
+      <Label layoutX="68.0" layoutY="16.0" prefHeight="38.0" prefWidth="543.0" text="Staff Dashboard" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="36.0" />
          </font>

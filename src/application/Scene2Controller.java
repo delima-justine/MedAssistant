@@ -1,37 +1,79 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class Scene2Controller {
+public class Scene2Controller implements Initializable {
 	
-	@FXML
-	Label emailLabel;
-	@FXML
-	Label passwordLabel;
+	@FXML TextField emailTextField;
+	@FXML TextField passwordTextField;
+	@FXML private ComboBox<String> roleSelectionLogin; 
+	
+	String[] roles = {"Patient", "Staff", "Admin", "Doctor"};
 	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
-	public void displayName(String email, String password) {
-		emailLabel.setText("Email: " + email);
-		passwordLabel.setText("Password: " + password);
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		roleSelectionLogin.getItems().addAll(roles);
 	}
+
 	
 	public void switchToScene1(ActionEvent event) throws IOException{
 		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setTitle("MedAssistant");
+		stage.setScene(scene);
+		stage.centerOnScreen();
+		stage.show();
+	}
+		
+	public void login(ActionEvent event) throws IOException{
+		
+		String user_email = emailTextField.getText(); 
+		String user_password = passwordTextField.getText();
+		String user_role = roleSelectionLogin.getValue();
+		String fxml_scene = null;
+		
+		switch (user_role) {
+			case "Patient":
+				fxml_scene = "patientDashboard.fxml";
+				break;
+			case "Doctor":
+				fxml_scene = "doctorDashboard.fxml";
+				break;
+			case "Admin":
+				fxml_scene = "adminDashboard.fxml";
+				break;
+			case "Staff":
+				fxml_scene = "staffDashboard.fxml";
+				break;
+		}	
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_scene));
+		root = loader.load();
+		
+		sceneController3 sceneController3 = loader.getController();
+		sceneController3.displayName(user_email, user_password, user_role);
+		
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setTitle("Patient Dashboard");
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();

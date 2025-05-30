@@ -27,7 +27,7 @@
                   <DropShadow blurType="GAUSSIAN" height="64.97" radius="20.9925" spread="0.18" />
                </effect>
             </Rectangle>
-            <Button layoutX="73.0" layoutY="338.0" mnemonicParsing="false" onAction="#switchToDoctorLoginForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Doctor" textFill="WHITE">
+            <Button layoutX="177.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Login" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="14.0" />
                </font>
@@ -37,27 +37,7 @@
                <effect>
                   <InnerShadow />
                </effect></Button>
-            <Button layoutX="219.0" layoutY="338.0" mnemonicParsing="false" onAction="#switchToAdminLoginForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Admin" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <InnerShadow />
-               </effect></Button>
-            <Button layoutX="363.0" layoutY="338.0" mnemonicParsing="false" onAction="#switchToAdminLoginForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Staff" textFill="WHITE">
-               <font>
-                  <Font name="Consolas Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <InnerShadow />
-               </effect></Button>
-            <Button layoutX="505.0" layoutY="338.0" mnemonicParsing="false" onAction="#switchToPatientSelection" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Patient" textFill="WHITE">
+            <Button layoutX="400.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToRegisterForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Register" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="14.0" />
                </font>

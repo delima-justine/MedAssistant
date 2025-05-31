@@ -50,6 +50,7 @@ public class Scene2Controller implements Initializable {
 		String user_password = passwordTextField.getText();
 		String user_role = roleSelectionLogin.getValue();
 		String fxml_scene = null;
+		String scene_title = null;
 		
 		// Checks if the user selects a role.
 		if (user_role == null || user_role.isEmpty()) {
@@ -64,15 +65,19 @@ public class Scene2Controller implements Initializable {
 			switch (user_role) {
 				case "Patient":
 					fxml_scene = "patientDashboard.fxml";
+					scene_title = "Patient Dashboard";
 					break;
 				case "Doctor":
 					fxml_scene = "doctorDashboard.fxml";
+					scene_title = "Doctor Dashboard";
 					break;
 				case "Admin":
 					fxml_scene = "adminDashboard.fxml";
+					scene_title = "Admin Dashboard";
 					break;
 				case "Staff":
 					fxml_scene = "staffDashboard.fxml";
+					scene_title = "Staff Dashboard";
 					break;
 			}	
 		}
@@ -85,7 +90,7 @@ public class Scene2Controller implements Initializable {
 		
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
-		stage.setTitle("Patient Dashboard");
+		stage.setTitle(scene_title);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();

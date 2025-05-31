@@ -20,4 +20,16 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/assets/stethoscope-white.png</name>
+			<type>1</type>
+			<location>C:/Users/L E N O V O/Downloads/image (4).png</location>
+		</link>
+		<link>
+			<name>src/assets/stethoscope.png</name>
+			<type>1</type>
+			<location>C:/Users/L E N O V O/Downloads/stethoscope-medical-tool.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

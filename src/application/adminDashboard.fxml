@@ -4,20 +4,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.sceneController3">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="591.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="154.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="591.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="154.0">
+         <effect>
+            <DropShadow />
+         </effect></Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
-      <Label fx:id="emailLabel" alignment="CENTER" layoutX="194.0" layoutY="119.0" prefHeight="42.0" prefWidth="395.0">
+      <Label fx:id="emailLabel" alignment="CENTER" layoutX="188.0" layoutY="236.0" prefHeight="42.0" prefWidth="243.0" text="Email: sample@gmail.com">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="187.0" layoutY="251.0" prefHeight="42.0" prefWidth="243.0">
+      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="188.0" layoutY="293.0" prefHeight="42.0" prefWidth="243.0" text="Password: ***********">
          <font>
             <Font size="22.0" />
          </font>
@@ -31,11 +36,22 @@
             <Font name="Arial Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="187.0" layoutY="317.0" prefHeight="42.0" prefWidth="243.0">
+      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="188.0" layoutY="359.0" prefHeight="42.0" prefWidth="243.0" text="Role: Admin">
          <font>
-            <Font size="22.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <ListView fx:id="managePatientsTable" layoutX="468.0" layoutY="173.0" prefHeight="372.0" prefWidth="395.0" />
+      <ListView fx:id="managePatientsTable" layoutX="468.0" layoutY="117.0" prefHeight="523.0" prefWidth="395.0" />
+      <Button layoutX="9.0" layoutY="122.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="136.0" text="Manage Users" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial Bold" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

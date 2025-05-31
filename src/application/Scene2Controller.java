@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -50,20 +51,31 @@ public class Scene2Controller implements Initializable {
 		String user_role = roleSelectionLogin.getValue();
 		String fxml_scene = null;
 		
-		switch (user_role) {
-			case "Patient":
-				fxml_scene = "patientDashboard.fxml";
-				break;
-			case "Doctor":
-				fxml_scene = "doctorDashboard.fxml";
-				break;
-			case "Admin":
-				fxml_scene = "adminDashboard.fxml";
-				break;
-			case "Staff":
-				fxml_scene = "staffDashboard.fxml";
-				break;
-		}	
+		// Checks if the user selects a role.
+		if (user_role == null || user_role.isEmpty()) {
+			Alert alertDialog = new Alert(Alert.AlertType.ERROR);
+//			alertDialog.setTitle("Warnin");
+			alertDialog.setHeaderText("Error");
+			alertDialog.setContentText("Please choose a role.");
+			alertDialog.showAndWait();
+			return; // return if empty.
+		} else {
+		
+			switch (user_role) {
+				case "Patient":
+					fxml_scene = "patientDashboard.fxml";
+					break;
+				case "Doctor":
+					fxml_scene = "doctorDashboard.fxml";
+					break;
+				case "Admin":
+					fxml_scene = "adminDashboard.fxml";
+					break;
+				case "Staff":
+					fxml_scene = "staffDashboard.fxml";
+					break;
+			}	
+		}
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_scene));
 		root = loader.load();

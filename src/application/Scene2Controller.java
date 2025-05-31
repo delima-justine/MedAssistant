@@ -54,7 +54,7 @@ public class Scene2Controller implements Initializable {
 		// Checks if the user selects a role.
 		if (user_role == null || user_role.isEmpty()) {
 			Alert alertDialog = new Alert(Alert.AlertType.ERROR);
-//			alertDialog.setTitle("Warnin");
+//			alertDialog.setTitle("Warning");
 			alertDialog.setHeaderText("Error");
 			alertDialog.setContentText("Please choose a role.");
 			alertDialog.showAndWait();
@@ -89,5 +89,27 @@ public class Scene2Controller implements Initializable {
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();
+	}
+	
+	public void register(ActionEvent event) {
+		String user_role = roleSelectionLogin.getValue();
+//		String fxml_scene = null;
+		
+		// Checks if the user selects a role.
+		if (user_role == null || user_role.isEmpty()) {
+			Alert alertDialog = new Alert(Alert.AlertType.ERROR);
+//			alertDialog.setTitle("Warning");
+			alertDialog.setHeaderText("Error");
+			alertDialog.setContentText("Please choose a role.");
+			alertDialog.showAndWait();
+			return; // return if empty.
+		} else {
+			Alert alertDialog = new Alert(Alert.AlertType.CONFIRMATION);
+			alertDialog.setTitle("Account confirmation");
+			alertDialog.setHeaderText("Confirm");
+			alertDialog.setContentText("Are the information correct?");
+			alertDialog.showAndWait();
+			return; // return if empty.
+		}
 	}
 }

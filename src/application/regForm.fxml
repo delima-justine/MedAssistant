@@ -65,7 +65,7 @@
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Button layoutX="260.0" layoutY="518.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="164.0" text="Register" />
+      <Button layoutX="260.0" layoutY="518.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="164.0" text="Register" />
       <Button layoutX="283.0" layoutY="565.0" mnemonicParsing="false" onAction="#switchToScene1" text="Back to main menu" />
       <ComboBox fx:id="roleSelectionLogin" layoutX="263.0" layoutY="455.0" prefWidth="150.0" promptText="Role" visibleRowCount="4" />
    </children>

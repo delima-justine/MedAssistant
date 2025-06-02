@@ -40,7 +40,7 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Button layoutX="16.0" layoutY="128.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="140.0" text="Manage Patients" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="16.0" layoutY="128.0" mnemonicParsing="false" onAction="#loadAppointments" prefHeight="74.0" prefWidth="140.0" text="Manage Patients" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
@@ -56,7 +56,7 @@
             <Image url="@../../../../../Downloads/image%20(4).png" />
          </image>
       </ImageView>
-      <TableView fx:id="appointmentTable" layoutX="181.0" layoutY="190.0" prefHeight="315.0" prefWidth="711.0">
+      <TableView fx:id="appointmentTable" editable="true" layoutX="181.0" layoutY="190.0" prefHeight="315.0" prefWidth="711.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="95.0" text="ID" />
             <TableColumn fx:id="patientID" prefWidth="119.0" text="Patient ID" />
@@ -75,7 +75,7 @@
       </Label>
       <Button fx:id="insertBtn" layoutX="38.0" layoutY="441.0" mnemonicParsing="false" onAction="#insertAppointment" prefHeight="46.0" prefWidth="98.0" text="Insert" />
       <Button layoutX="711.0" layoutY="526.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" text="Update Appointment" textAlignment="CENTER" wrapText="true" />
-      <Button layoutX="710.0" layoutY="581.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="119.0" text="Delete Appointment" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="710.0" layoutY="581.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="46.0" prefWidth="119.0" text="Delete Appointment" textAlignment="CENTER" wrapText="true" />
       <TextField fx:id="txtDoctorName" layoutX="11.0" layoutY="329.0" prefHeight="25.0" prefWidth="149.0" promptText="Doctor Name" />
       <TextField fx:id="txtPatientID" layoutX="12.0" layoutY="297.0" prefHeight="25.0" prefWidth="149.0" promptText="Patient ID" />
       <ComboBox fx:id="selectStatus" layoutX="11.0" layoutY="393.0" prefHeight="25.0" prefWidth="149.0" promptText="Status" />

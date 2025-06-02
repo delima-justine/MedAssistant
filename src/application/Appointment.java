@@ -2,14 +2,14 @@ package application;
 
 import java.time.LocalDate;
 
-public class Patient {
-	private String id;
+public class Appointment {
+	private Integer id;
 	private String patientID;
 	private String doctorName;
 	private LocalDate appointmentDate;
 	private String status;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -29,7 +29,7 @@ public class Patient {
 		return status;
 	}
 	
-	public Patient(String id, String patientID, String doctorName, LocalDate appt_date, String status) {
+	public Appointment(Integer id, String patientID, String doctorName, LocalDate appt_date, String status) {
 		super();
 		this.id = id;
 		this.patientID = patientID;

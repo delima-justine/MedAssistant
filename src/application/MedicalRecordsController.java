@@ -1,32 +1,43 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class MedicalRecordsController {
+public class MedicalRecordsController implements Initializable{
 
-    @FXML private TableColumn<?, ?> diagnosisColm;
     @FXML private Label greetingLabel;
-    @FXML private TableColumn<?, ?> id;
     @FXML private Button insertBtn;
-    @FXML private TableView<?> medicalRecordsTable;
-    @FXML private TableColumn<?, ?> patientID;
-    @FXML private TableColumn<?, ?> prescriptionColm;
-    @FXML private TableColumn<?, ?> recordDateColm;
+    @FXML private TableView<MedicalRecord> medicalRecordsTable;
+    @FXML private TableColumn<MedicalRecord, Integer> medicalId;
+    @FXML private TableColumn<MedicalRecord, String> patientIdColm;
+    @FXML private TableColumn<MedicalRecord, String> diagnosisColm;
+    @FXML private TableColumn<MedicalRecord, String> prescriptionColm;
+    @FXML private TableColumn<MedicalRecord, String> recordDateColm;
     @FXML private TextField txtDiagnosis;
     @FXML private TextField txtPatientID;
     @FXML private TextField txtPrescription;
@@ -35,6 +46,11 @@ public class MedicalRecordsController {
     private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
+	public void setGreeting(String fullname) throws SQLException {
+	    greetingLabel.setText("Good day, Dr. " + fullname);
+	    loadMedicalRecords(null);
+	}
 
 	public void switchToDoctorAppointments(ActionEvent event) throws IOException, SQLException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("doctorDashboard.fxml"));
@@ -43,7 +59,7 @@ public class MedicalRecordsController {
 		// loads the methods of other class.
 		sceneController3 sceneController3 = loader.getController();
 		sceneController3.setGreeting(Session.getFullname()); // get session.
-		sceneController3.loadAppointments(null); 
+		sceneController3.loadAppointments(null);
 		
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -53,13 +69,14 @@ public class MedicalRecordsController {
 		stage.show();
 	}
 
-    public void switchToMedicalRecords(ActionEvent event) throws IOException {
+    public void switchToMedicalRecords(ActionEvent event) throws IOException, SQLException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("doctorDashboard2.fxml"));
 	    root = loader.load();
 
 	    // Get the new controller instance
 	    MedicalRecordsController controller = loader.getController();
 	    controller.setGreeting(Session.getFullname());
+	    loadMedicalRecords(null); // load medical records from database to tableview
 
 	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	    scene = new Scene(root);
@@ -79,9 +96,123 @@ public class MedicalRecordsController {
 		stage.centerOnScreen();
 		stage.show();
 	}
+	
+	ObservableList<MedicalRecord> InitialData() {
+		MedicalRecord medRec1 = new MedicalRecord(1, "P001", "Fever", "Biogesic", LocalDate.now());
+		MedicalRecord medRec2 = new MedicalRecord(2, "P002", "Sore Throat", "Neozep", LocalDate.now());
+		return FXCollections.<MedicalRecord> observableArrayList(medRec1, medRec2);
+	}
 
-	public void setGreeting(String fullname) {
-		    greetingLabel.setText("Good day, Dr. " + fullname);
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// 														Dapat same ito nong nasa MedicalRecord class getter and setter.            
+		medicalId.setCellValueFactory(new PropertyValueFactory<MedicalRecord, Integer>("medicalId"));
+		patientIdColm.setCellValueFactory(new PropertyValueFactory<MedicalRecord, String>("patientId"));
+		diagnosisColm.setCellValueFactory(new PropertyValueFactory<MedicalRecord, String>("diagnosis"));
+		prescriptionColm.setCellValueFactory(new PropertyValueFactory<MedicalRecord, String>("prescription"));
+		recordDateColm.setCellValueFactory(new PropertyValueFactory<MedicalRecord, String>("recordDate"));
+		
+		try {
+			loadMedicalRecords(null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		medicalRecordsTable.setItems(InitialData());
+	}
+	
+	public void loadMedicalRecords(ActionEvent event) throws SQLException {
+		ObservableList<MedicalRecord> medicalRecordsList = FXCollections.observableArrayList();
+		
+		try(Connection conn = MedAssistantDB.getConnection()) {
+			Statement stmt = conn.createStatement();
+			String sql = "SELECT * FROM MedicalRecords;";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				MedicalRecord newRecord = new MedicalRecord(
+						rs.getInt("id"),
+						rs.getString("patient_id"),
+						rs.getString("diagnosis"),
+						rs.getString("prescription"),
+						rs.getDate("record_date").toLocalDate()
+				);
+				medicalRecordsList.add(newRecord);
+			}
+			medicalRecordsTable.setItems(medicalRecordsList);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void addMedicalRecord(ActionEvent event) {
+		Integer count = medicalRecordsTable.getItems().size() + 1;
+		String patientId = txtPatientID.getText().trim();
+		String doctor_diagnosis = txtDiagnosis.getText().trim();
+		String doctor_prescription = txtPrescription.getText().trim();
+		LocalDate record_date = txtRecordDate.getValue();
+		MedicalRecord newRecord = new MedicalRecord(count, patientId, doctor_diagnosis, doctor_prescription, record_date);
+		
+		// Add the record to the table view.
+		if (!patientId.isEmpty() && 
+			!doctor_diagnosis.isEmpty() && 
+			!doctor_prescription.isEmpty() && 
+			record_date != null) 
+		{
+			medicalRecordsTable.getItems().add(newRecord);
+		} else {
+			new Alert(Alert.AlertType.WARNING, "Please fill all the fields.").show();;
+		}
+		
+		// Clears the field.
+		txtPatientID.clear();
+		txtDiagnosis.clear();
+		txtPrescription.clear();
+		txtRecordDate.setValue(null);
+	}
+	
+	public void updateMedicalRecord(ActionEvent event) {
+		MedicalRecord selectedMedicalRecord = medicalRecordsTable.getSelectionModel().getSelectedItem();
+		
+		if (selectedMedicalRecord == null) {
+			new Alert(Alert.AlertType.WARNING, "Please select a row to edit.");
+			return;
+		}
+		
+		// Set the field values to the selected row.
+		selectedMedicalRecord.setPatientId(txtPatientID.getText());
+		selectedMedicalRecord.setDiagnosis(txtDiagnosis.getText());
+		selectedMedicalRecord.setPrescription(txtPrescription.getText());
+		selectedMedicalRecord.setRecordDate(txtRecordDate.getValue());
+		
+		// Refresh the table
+		medicalRecordsTable.refresh();
+	}
+	
+	// Method to edit a medical record.
+	public void editMedicalRecord(ActionEvent event) {
+		MedicalRecord selectedMedicalRecord = medicalRecordsTable.getSelectionModel().getSelectedItem();
+		
+		if (selectedMedicalRecord == null) {
+			new Alert(Alert.AlertType.WARNING, "Please select a row to edit.");
+			return;
+		} 
+		
+		txtPatientID.setText(selectedMedicalRecord.getPatientId());
+		txtDiagnosis.setText(selectedMedicalRecord.getDiagnosis());
+		txtPrescription.setText(selectedMedicalRecord.getPrescription());
+		txtRecordDate.setValue(selectedMedicalRecord.getRecordDate());
+	}
+	
+	public void deleteMedicalRecord(ActionEvent event) {
+		MedicalRecord selectedMedicalRecord = medicalRecordsTable.getSelectionModel().getSelectedItem();
+		
+		if (selectedMedicalRecord != null) {
+			medicalRecordsTable.getItems().remove(selectedMedicalRecord);
+		} else {
+			new Alert(Alert.AlertType.WARNING, "Please select a row to delete.").show();
+		}
 	}
 
 }

@@ -46,8 +46,8 @@
       </Button>
       <TableView fx:id="medicalRecordsTable" editable="true" layoutX="181.0" layoutY="190.0" prefHeight="315.0" prefWidth="711.0">
          <columns>
-            <TableColumn fx:id="id" prefWidth="95.0" text="ID" />
-            <TableColumn fx:id="patientID" prefWidth="119.0" text="Patient ID" />
+            <TableColumn fx:id="medicalId" prefWidth="95.0" text="ID" />
+            <TableColumn fx:id="patientIdColm" prefWidth="119.0" text="Patient ID" />
             <TableColumn fx:id="diagnosisColm" prefWidth="214.0" text="Diagnosis" />
             <TableColumn fx:id="prescriptionColm" prefWidth="151.0" text="Prescription" />
             <TableColumn fx:id="recordDateColm" prefWidth="131.0" text="Record Date" />
@@ -66,7 +66,8 @@
             <Font name="Consolas Bold" size="49.0" />
          </font>
       </Label>
-      <Button fx:id="insertBtn" layoutX="219.0" layoutY="550.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: green;" text="Add Appointment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#47a6ff" height="109.0" layoutX="181.0" layoutY="516.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="708.0" />
+      <Button layoutX="219.0" layoutY="550.0" mnemonicParsing="false" onAction="#addMedicalRecord" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: green;" text="Add Record" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -77,14 +78,14 @@
                </input>
             </InnerShadow>
          </effect></Button>
-      <Button layoutX="27.0" layoutY="380.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: orange;" text="Update Appointment" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="27.0" layoutY="380.0" mnemonicParsing="false" onAction="#updateMedicalRecord" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: orange;" text="Update Record" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
          <effect>
             <DropShadow radius="6.335" width="6.34" />
          </effect></Button>
-      <Button layoutX="26.0" layoutY="441.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: maroon;" text="Delete Appointment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button layoutX="26.0" layoutY="441.0" mnemonicParsing="false" onAction="#deleteMedicalRecord" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: maroon;" text="Delete Record" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -104,7 +105,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="27.0" layoutY="319.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: #2196F3;" text="Edit Appointment" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="27.0" layoutY="319.0" mnemonicParsing="false" onAction="#editMedicalRecord" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: #2196F3;" text="Edit Record" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

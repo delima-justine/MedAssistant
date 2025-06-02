@@ -110,7 +110,7 @@ public class sceneController3 implements Initializable {
 			System.out.println("Success Fetch.");
 			
 			while(rs.next()) {
-				Appointment newAppointment= new Appointment(
+				Appointment newAppointment = new Appointment(
 						rs.getInt("id"), 
 						rs.getString("patient_id"), 
 						rs.getString("doctor_name"), 
@@ -189,7 +189,6 @@ public class sceneController3 implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		id.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("id"));
 		patientID.setCellValueFactory(new PropertyValueFactory<Appointment, String>("patientID"));
 		doctorName.setCellValueFactory(new PropertyValueFactory<Appointment, String>("doctorName"));
@@ -203,11 +202,11 @@ public class sceneController3 implements Initializable {
 			e.printStackTrace();
 		}
 		
-		appointmentTable.setEditable(true);
 		selectStatus.getItems().addAll(appointmentStatus);
 	}
 	
 	public void switchToScene1(ActionEvent event) throws IOException{
+		Session.clear(); // clears the session / log out.
 		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -217,12 +216,13 @@ public class sceneController3 implements Initializable {
 		stage.show();
 	}
 	
-	public void switchToMedicalRecords(ActionEvent event) throws IOException {
+	public void switchToMedicalRecords(ActionEvent event) throws IOException, SQLException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("doctorDashboard2.fxml"));
 	    root = loader.load();
 
 	    MedicalRecordsController controller = loader.getController();
 	    controller.setGreeting(Session.getFullname());
+	    controller.loadMedicalRecords(null);
 
 	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	    scene = new Scene(root);

@@ -52,6 +52,7 @@ public class Scene2Controller implements Initializable {
 
 	
 	public void switchToScene1(ActionEvent event) throws IOException{
+		Session.clear(); // clears the session / log out.
 		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -60,11 +61,13 @@ public class Scene2Controller implements Initializable {
 		stage.show();
 	}
 		
-	public void login(ActionEvent event) throws IOException{
+	public void login(ActionEvent event) throws IOException, SQLException{
 		
 		String user_email = emailTextField.getText(); 
 		String user_password = passwordTextField.getText();
 		String user_role = roleSelectionLogin.getValue();
+		String first_name = "";
+		String last_name = "";
 		String fxml_scene = null;
 		String scene_title = null;
 		
@@ -99,6 +102,10 @@ public class Scene2Controller implements Initializable {
                 if (rs.next()) {
                 	// if the user is found, it will display a successful alert.
                     new Alert(Alert.AlertType.INFORMATION, "Login successful!").showAndWait();
+                    first_name = rs.getString("first_name");
+                    last_name = rs.getString("last_name");
+                    
+//                    System.out.println("Doctor FullName: " + firstName + " " + lastName);
                 } else {
                 	// if the user is not found, it will display an invalid alert.
                     new Alert(Alert.AlertType.ERROR, "Invalid credentials.").show();
@@ -135,7 +142,7 @@ public class Scene2Controller implements Initializable {
 		
 		// loads the methods of other class.
 		sceneController3 sceneController3 = loader.getController();
-		sceneController3.displayName(user_email, user_password, user_role);
+		sceneController3.displayName(user_email, user_password, user_role, first_name, last_name);
 		
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

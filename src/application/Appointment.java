@@ -29,6 +29,26 @@ public class Appointment {
 		return status;
 	}
 	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPatientID(String patientID) {
+		this.patientID = patientID;
+	}
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+
+	public void setAppointmentDate(LocalDate appointmentDate) {
+		this.appointmentDate = appointmentDate;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Appointment(Integer id, String patientID, String doctorName, LocalDate appt_date, String status) {
 		super();
 		this.id = id;

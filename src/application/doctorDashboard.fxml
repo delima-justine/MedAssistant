@@ -2,8 +2,12 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,12 +19,12 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="581.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="172.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="MAROON" strokeType="INSIDE" strokeWidth="0.0" width="906.0" />
-      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="194.0" layoutY="255.0" prefHeight="42.0" prefWidth="305.0" text="Email: sample@gmail.com">
+      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="402.0" layoutY="22.0" prefHeight="42.0" prefWidth="305.0" text="Email: sample@gmail.com">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="205.0" layoutY="304.0" prefHeight="42.0" prefWidth="284.0" text="Password: **********">
+      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="524.0" layoutY="22.0" prefHeight="42.0" prefWidth="284.0" text="Password: **********">
          <font>
             <Font size="22.0" />
          </font>
@@ -31,12 +35,11 @@
             <Font name="Arial Bold" size="32.0" />
          </font>
       </Label>
-      <Label fx:id="emailLabel" alignment="CENTER" layoutX="194.0" layoutY="354.0" prefHeight="42.0" prefWidth="298.0" text="Role: Doctor">
+      <Label fx:id="emailLabel" alignment="CENTER" layoutX="495.0" layoutY="22.0" prefHeight="42.0" prefWidth="298.0" text="Role: Doctor">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <ListView fx:id="managePatientsTable" layoutX="507.0" layoutY="104.0" prefHeight="517.0" prefWidth="365.0" />
       <Button layoutX="16.0" layoutY="128.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="140.0" text="Manage Patients" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="18.0" />
@@ -53,5 +56,29 @@
             <Image url="@../../../../../Downloads/image%20(4).png" />
          </image>
       </ImageView>
+      <TableView fx:id="appointmentTable" layoutX="181.0" layoutY="190.0" prefHeight="315.0" prefWidth="711.0">
+         <columns>
+            <TableColumn fx:id="id" prefWidth="95.0" text="ID" />
+            <TableColumn fx:id="patientID" prefWidth="119.0" text="Patient ID" />
+            <TableColumn fx:id="doctorName" prefWidth="214.0" text="Doctor Name" />
+            <TableColumn fx:id="appointmentDate" prefWidth="151.0" text="Appointment Date" />
+            <TableColumn fx:id="status" prefWidth="131.0" text="Status" />
+         </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <Label alignment="CENTER" layoutX="180.0" layoutY="111.0" prefHeight="62.0" prefWidth="711.0" text="Appointments">
+         <font>
+            <Font name="Consolas Bold" size="49.0" />
+         </font>
+      </Label>
+      <Button fx:id="insertBtn" layoutX="38.0" layoutY="441.0" mnemonicParsing="false" onAction="#insertAppointment" prefHeight="46.0" prefWidth="98.0" text="Insert" />
+      <Button layoutX="711.0" layoutY="526.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" text="Update Appointment" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="710.0" layoutY="581.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="119.0" text="Delete Appointment" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="txtDoctorName" layoutX="11.0" layoutY="329.0" prefHeight="25.0" prefWidth="149.0" promptText="Doctor Name" />
+      <TextField fx:id="txtPatientID" layoutX="12.0" layoutY="297.0" prefHeight="25.0" prefWidth="149.0" promptText="Patient ID" />
+      <ComboBox fx:id="selectStatus" layoutX="11.0" layoutY="393.0" prefHeight="25.0" prefWidth="149.0" promptText="Status" />
+      <DatePicker fx:id="txtApptDate" layoutX="11.0" layoutY="361.0" prefHeight="25.0" prefWidth="149.0" promptText="Appt. Date" />
    </children>
 </AnchorPane>

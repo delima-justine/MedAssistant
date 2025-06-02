@@ -3,8 +3,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,12 +16,12 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="577.0" layoutY="73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="151.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
-      <Label fx:id="emailLabel" alignment="CENTER" layoutX="159.0" layoutY="259.0" prefHeight="42.0" prefWidth="303.0" text="Email: sample@gmail.com">
+      <Label fx:id="emailLabel" alignment="CENTER" layoutX="422.0" layoutY="22.0" prefHeight="42.0" prefWidth="303.0" text="Email: sample@gmail.com">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="159.0" layoutY="301.0" prefHeight="42.0" prefWidth="303.0" text="Password: **********">
+      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="574.0" layoutY="19.0" prefHeight="42.0" prefWidth="303.0" text="Password: **********">
          <font>
             <Font size="22.0" />
          </font>
@@ -32,18 +32,11 @@
             <Font name="Arial Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="175.0" layoutY="343.0" prefHeight="49.0" prefWidth="272.0" text="Role: Admin">
+      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="295.0" layoutY="16.0" prefHeight="49.0" prefWidth="272.0" text="Role: Admin">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <ListView fx:id="managePatientsTable" layoutX="468.0" layoutY="104.0" prefHeight="523.0" prefWidth="407.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow />
-         </effect></ListView>
       <Button layoutX="11.0" layoutY="118.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="125.0" text="Edit Profile" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="19.0" />
@@ -71,5 +64,22 @@
             <Image url="@../../../../../Downloads/image%20(4).png" />
          </image>
       </ImageView>
+      <TableView fx:id="appointmentTable" layoutX="171.0" layoutY="180.0" prefHeight="423.0" prefWidth="711.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="95.0" text="ID" />
+          <TableColumn fx:id="patientID" prefWidth="119.0" text="Patient ID" />
+            <TableColumn fx:id="doctorName" prefWidth="214.0" text="Doctor Name" />
+            <TableColumn fx:id="appointmentDate" prefWidth="151.0" text="Appointment Date" />
+            <TableColumn fx:id="status" prefWidth="131.0" text="Status" />
+        </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <Label alignment="CENTER" layoutX="170.0" layoutY="101.0" prefHeight="62.0" prefWidth="711.0" text="Appointments">
+         <font>
+            <Font name="Consolas Bold" size="49.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

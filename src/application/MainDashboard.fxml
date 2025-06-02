@@ -29,7 +29,7 @@
                   <DropShadow blurType="GAUSSIAN" height="64.97" radius="20.9925" spread="0.18" />
                </effect>
             </Rectangle>
-            <Button layoutX="177.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Login" textFill="WHITE">
+            <Button layoutX="178.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" styleClass="loginBtn" stylesheets="@application.css" text="Login" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="14.0" />
                </font>
@@ -39,7 +39,7 @@
                <effect>
                   <InnerShadow />
                </effect></Button>
-            <Button layoutX="400.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToRegisterForm" prefHeight="36.0" prefWidth="123.0" style="-fx-background-color: maroon;" text="Register" textFill="WHITE">
+            <Button layoutX="400.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToRegisterForm" prefHeight="36.0" prefWidth="123.0" styleClass="registerBtn" stylesheets="@application.css" text="Register" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="14.0" />
                </font>

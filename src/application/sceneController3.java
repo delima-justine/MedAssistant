@@ -33,7 +33,7 @@ public class sceneController3 implements Initializable {
 	
 	@FXML private Label emailLabel;
 	@FXML private Label passwordLabel;
-	@FXML private Label roleSelectionLabel;
+	@FXML private Label greetingLabel;
 	@FXML private ListView<String> managePatientsTable;
 	@FXML private TableView<Appointment> appointmentTable;
 	@FXML private TableColumn<Appointment, Integer> id;
@@ -44,6 +44,12 @@ public class sceneController3 implements Initializable {
 	@FXML private TextField txtPatientID;
 	@FXML private DatePicker txtApptDate;
 	@FXML private ComboBox<String> selectStatus;
+	@FXML private TableView<?> medicalRecordsTable;
+	@FXML private TableColumn<?, ?> diagnosisColm;
+	@FXML private TableColumn<?, ?> recordDateColm;
+    @FXML private TextField txtDiagnosis;
+    @FXML private TextField txtPrescription;
+    @FXML private DatePicker txtRecordDate;
 	
 	private Stage stage;
 	private Scene scene;
@@ -52,20 +58,16 @@ public class sceneController3 implements Initializable {
 	
 	String[] appointmentStatus = {"Done", "Active", "Pending", "Cancelled"};
 	
-	public void displayName(String email, String password, String role, String first_name, String last_name) throws SQLException {		
-		
-		emailLabel.setText("Email: " + email);
-		passwordLabel.setText("Password: " + password);
-		roleSelectionLabel.setText("Role: " + role);
-		fullname = first_name + " " + last_name;
+	public void setGreeting(String fullname) throws SQLException {	
+		this.fullname = fullname;
 		System.out.println(fullname);
+		greetingLabel.setText("Good day, Dr. " + Session.getFullname());
 		loadAppointments(null); // load information.
 	}
 	
 	// Method to insert an appointment.
 	public void insertAppointment(ActionEvent event) throws SQLException {
 		String patient_id = txtPatientID.getText().trim();
-//		String doctor_name = txtDoctorName.getText().trim();
 		LocalDate appt_date = txtApptDate.getValue();
 		String appt_status = selectStatus.getValue();
 		 
@@ -103,7 +105,7 @@ public class sceneController3 implements Initializable {
 		
 		try(Connection conn = MedAssistantDB.getConnection()) {
 			Statement stmt = conn.createStatement();
-			String sql = "SELECT * FROM Appointments WHERE doctor_name = '" + fullname + "';";
+			String sql = "SELECT * FROM Appointments WHERE doctor_name = '" + Session.getFullname() + "';";
 			ResultSet rs = stmt.executeQuery(sql);
 			System.out.println("Success Fetch.");
 			
@@ -114,32 +116,51 @@ public class sceneController3 implements Initializable {
 						rs.getString("doctor_name"), 
 						rs.getDate("appointment_date").toLocalDate(), 
 						rs.getString("status")
-				);
-				appointmentList.add(newAppointment); 
-			}
-			appointmentTable.setItems(appointmentList); // Adds the appointmentList to the table.
-		} catch(Exception e) {
+						);
+					appointmentList.add(newAppointment); 
+				}
+				// Adds the appointmentList to the table.
+				appointmentTable.setItems(appointmentList);
+			} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
 	// Method to update an appointment
-	public void updateAppointment(ActionEvent event) {
+	public void updateAppointment(ActionEvent event) throws SQLException {
 		Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 		
-		if (selectedAppointment != null) {
-			selectedAppointment.setPatientID(txtPatientID.getText());
-			selectedAppointment.setAppointmentDate(txtApptDate.getValue());
-			selectedAppointment.setStatus(selectStatus.getValue());
+		if (selectedAppointment == null) {	
+			new Alert(Alert.AlertType.ERROR, "Please select a row to update").show();
+			return;
+		}
+		
+		try (Connection conn = MedAssistantDB.getConnection()) {
+			Statement stmt = conn.createStatement();
+			String sql = "UPDATE Appointments "
+					+ "SET patient_id = '" + txtPatientID.getText() + "', "
+					+ "appointment_date = '" + java.sql.Date.valueOf(txtApptDate.getValue()) + "', "
+					+ "status = '" + selectStatus.getValue() + "'"
+					+ "WHERE id = " + selectedAppointment.getId() +";";	
 			
-			appointmentTable.refresh(); // refreshes the table.
-		} else {
+			stmt.executeUpdate(sql); // executes the query.
+			loadAppointments(null); // refreshes the table.
+		} catch(SQLException e) {
+			new Alert(Alert.AlertType.ERROR, "Database Error").show();
+		} catch(NullPointerException e) {
 			new Alert(Alert.AlertType.ERROR, "Please select a row to update").show();
 		}
 	}
 	
+	// Puts a row to the text fields.
 	public void editAppointment(ActionEvent event) {
 		Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+		
+		if (selectedAppointment == null) {	
+			new Alert(Alert.AlertType.ERROR, "Please select a row to update").show();
+			return;
+		}
+		
 		txtPatientID.setText(selectedAppointment.getPatientID());
 		txtApptDate.setValue(selectedAppointment.getAppointmentDate());
 		selectStatus.setValue(selectedAppointment.getStatus());
@@ -161,19 +182,9 @@ public class sceneController3 implements Initializable {
 		    } else {
 		        new Alert(Alert.AlertType.WARNING, "Please select an appointment to delete.").show();
 		    }
-		} catch (Exception e) {
-			new Alert(Alert.AlertType.ERROR, "Please select an appointment to delete").show();;
+		} catch (SQLException e) {
+			new Alert(Alert.AlertType.ERROR, "Database Error").show();;
 		}
-	}
-	
-	public void switchToScene1(ActionEvent event) throws IOException{
-		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setTitle("MedAssistant");
-		stage.setScene(scene);
-		stage.centerOnScreen();
-		stage.show();
 	}
 
 	@Override
@@ -185,7 +196,6 @@ public class sceneController3 implements Initializable {
 		appointmentDate.setCellValueFactory(new PropertyValueFactory<Appointment, String>("appointmentDate"));
 		status.setCellValueFactory(new PropertyValueFactory<Appointment, String>("status"));
 		
-//		appointmentTable.setItems(initialData());
 		try {
 			loadAppointments(null);
 		} catch (SQLException e) {
@@ -195,5 +205,30 @@ public class sceneController3 implements Initializable {
 		
 		appointmentTable.setEditable(true);
 		selectStatus.getItems().addAll(appointmentStatus);
+	}
+	
+	public void switchToScene1(ActionEvent event) throws IOException{
+		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setTitle("MedAssistant");
+		stage.setScene(scene);
+		stage.centerOnScreen();
+		stage.show();
+	}
+	
+	public void switchToMedicalRecords(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("doctorDashboard2.fxml"));
+	    root = loader.load();
+
+	    MedicalRecordsController controller = loader.getController();
+	    controller.setGreeting(Session.getFullname());
+
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setTitle("Doctor's Medical Records");
+	    stage.setScene(scene);
+	    stage.centerOnScreen();
+	    stage.show();
 	}
 }

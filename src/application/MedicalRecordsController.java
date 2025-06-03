@@ -19,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -31,7 +30,6 @@ import javafx.stage.Stage;
 public class MedicalRecordsController implements Initializable{
 
     @FXML private Label greetingLabel;
-    @FXML private Button insertBtn;
     @FXML private TableView<MedicalRecord> medicalRecordsTable;
     @FXML private TableColumn<MedicalRecord, Integer> medicalId;
     @FXML private TableColumn<MedicalRecord, String> patientIdColm;
@@ -115,7 +113,6 @@ public class MedicalRecordsController implements Initializable{
 		try {
 			loadMedicalRecords(null);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -146,25 +143,39 @@ public class MedicalRecordsController implements Initializable{
 		}
 	}
 	
-	public void addMedicalRecord(ActionEvent event) {
-		Integer count = medicalRecordsTable.getItems().size() + 1;
+	public void addMedicalRecord(ActionEvent event) throws SQLException {
+//		Integer count = medicalRecordsTable.getItems().size() + 1;
 		String patientId = txtPatientID.getText().trim();
 		String doctor_diagnosis = txtDiagnosis.getText().trim();
 		String doctor_prescription = txtPrescription.getText().trim();
 		LocalDate record_date = txtRecordDate.getValue();
-		MedicalRecord newRecord = new MedicalRecord(count, patientId, doctor_diagnosis, doctor_prescription, record_date);
+//		MedicalRecord newRecord = new MedicalRecord(count, patientId, doctor_diagnosis, doctor_prescription, record_date);
 		
 		// Add the record to the table view.
-		if (!patientId.isEmpty() && 
-			!doctor_diagnosis.isEmpty() && 
-			!doctor_prescription.isEmpty() && 
-			record_date != null) 
-		{
-			medicalRecordsTable.getItems().add(newRecord);
-		} else {
-			new Alert(Alert.AlertType.WARNING, "Please fill all the fields.").show();;
+		try(Connection conn = MedAssistantDB.getConnection()) {
+			if (!patientId.isEmpty() && 
+				!doctor_diagnosis.isEmpty() && 
+				!doctor_prescription.isEmpty() && 
+				record_date != null) 
+			{
+				Statement stmt = conn.createStatement();
+				String sql = "INSERT INTO MedicalRecords"
+						+ "(patient_id, diagnosis, prescription, record_date)"
+						+ "VALUES('"
+						+ patientId + "', '"
+						+ doctor_diagnosis + "', '" 
+						+ doctor_prescription + "', '"
+						+ java.sql.Date.valueOf(record_date) + "'); ";
+//				medicalRecordsTable.getItems().add(newRecord);
+				stmt.executeUpdate(sql);
+				loadMedicalRecords(null);
+			} else {
+				new Alert(Alert.AlertType.WARNING, "Please fill all the fields.").show();
+			}
+		} catch(SQLException e) {
+			new Alert(Alert.AlertType.ERROR, "Database Error.").show();
+			e.printStackTrace();
 		}
-		
 		// Clears the field.
 		txtPatientID.clear();
 		txtDiagnosis.clear();
@@ -172,7 +183,7 @@ public class MedicalRecordsController implements Initializable{
 		txtRecordDate.setValue(null);
 	}
 	
-	public void updateMedicalRecord(ActionEvent event) {
+	public void updateMedicalRecord(ActionEvent event) throws SQLException {
 		MedicalRecord selectedMedicalRecord = medicalRecordsTable.getSelectionModel().getSelectedItem();
 		
 		if (selectedMedicalRecord == null) {
@@ -180,12 +191,21 @@ public class MedicalRecordsController implements Initializable{
 			return;
 		}
 		
-		// Set the field values to the selected row.
-		selectedMedicalRecord.setPatientId(txtPatientID.getText());
-		selectedMedicalRecord.setDiagnosis(txtDiagnosis.getText());
-		selectedMedicalRecord.setPrescription(txtPrescription.getText());
-		selectedMedicalRecord.setRecordDate(txtRecordDate.getValue());
-		
+		try(Connection conn = MedAssistantDB.getConnection()) {
+			Statement stmt = conn.createStatement();
+			String sql = "UPDATE MedicalRecords "
+					+ "SET patient_id = '" + txtPatientID.getText() + "', "
+					+ "diagnosis = '" + txtDiagnosis.getText() + "', "
+					+ "prescription = '" + txtPrescription.getText() +"', "
+					+ "record_date = '" + java.sql.Date.valueOf(txtRecordDate.getValue()) + "'"
+					+ "WHERE id = " + selectedMedicalRecord.getMedicalId() + ";";
+			
+			stmt.executeUpdate(sql);
+			loadMedicalRecords(null);
+		} catch(SQLException e) {
+			new Alert(Alert.AlertType.ERROR, "Database Error.");
+		}
+
 		// Refresh the table
 		medicalRecordsTable.refresh();
 	}
@@ -205,13 +225,24 @@ public class MedicalRecordsController implements Initializable{
 		txtRecordDate.setValue(selectedMedicalRecord.getRecordDate());
 	}
 	
-	public void deleteMedicalRecord(ActionEvent event) {
+	public void deleteMedicalRecord(ActionEvent event) throws SQLException {
 		MedicalRecord selectedMedicalRecord = medicalRecordsTable.getSelectionModel().getSelectedItem();
 		
-		if (selectedMedicalRecord != null) {
-			medicalRecordsTable.getItems().remove(selectedMedicalRecord);
-		} else {
-			new Alert(Alert.AlertType.WARNING, "Please select a row to delete.").show();
+		try (Connection conn = MedAssistantDB.getConnection()) {
+			if (selectedMedicalRecord != null) {
+				Integer medicalRecordId = selectedMedicalRecord.getMedicalId();
+				Statement stmt = conn.createStatement();
+				String sql = "DELETE FROM MedicalRecords WHERE id = " + medicalRecordId;
+				
+				stmt.execute(sql);
+				loadMedicalRecords(null);
+				
+//				medicalRecordsTable.getItems().remove(selectedMedicalRecord);
+			} else {
+				new Alert(Alert.AlertType.WARNING, "Please select a row to delete.").show();
+			}
+		} catch (SQLException e) {
+			new Alert(Alert.AlertType.ERROR, "Database Error").show();
 		}
 	}
 

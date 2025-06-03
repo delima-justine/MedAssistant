@@ -122,10 +122,37 @@ public class Scene2Controller implements Initializable {
 				case "Doctor":
 					fxml_scene = "doctorDashboard.fxml";
 					scene_title = "Doctor Dashboard";
+					
+					// Dynamic change of scenes based on the role selected of user.
+					FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_scene));
+					root = loader.load();
+					
+					// loads the methods of other class.
+					sceneController3 sceneController3 = loader.getController();
+					sceneController3.setGreeting(full_name);
+					
+					stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					scene = new Scene(root);
+					stage.setTitle(scene_title);
+					stage.setScene(scene);
+					stage.centerOnScreen();
+					stage.show();
 					break;
 				case "Admin":
 					fxml_scene = "adminDashboard.fxml";
 					scene_title = "Admin Dashboard";
+					
+					// Dynamic change of scenes based on the role selected of user.
+					FXMLLoader loader1 = new FXMLLoader(getClass().getResource(fxml_scene));
+					root = loader1.load();
+					
+					stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					scene = new Scene(root);
+					stage.setTitle(scene_title);
+					stage.setScene(scene);
+					stage.centerOnScreen();
+					stage.show();
+					
 					break;
 				case "Staff":
 					fxml_scene = "staffDashboard.fxml";
@@ -133,21 +160,6 @@ public class Scene2Controller implements Initializable {
 					break;
 			}	
 		}
-		
-		// Dynamic change of scenes based on the role selected of user.
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml_scene));
-		root = loader.load();
-		
-		// loads the methods of other class.
-		sceneController3 sceneController3 = loader.getController();
-		sceneController3.setGreeting(full_name);
-		
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setTitle(scene_title);
-		stage.setScene(scene);
-		stage.centerOnScreen();
-		stage.show();
 	}
 	 
 	public boolean areFieldsEmpty(String[] fields) {

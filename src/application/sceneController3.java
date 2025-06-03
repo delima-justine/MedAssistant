@@ -44,9 +44,6 @@ public class sceneController3 implements Initializable {
 	@FXML private TextField txtPatientID;
 	@FXML private DatePicker txtApptDate;
 	@FXML private ComboBox<String> selectStatus;
-	@FXML private TableView<?> medicalRecordsTable;
-	@FXML private TableColumn<?, ?> diagnosisColm;
-	@FXML private TableColumn<?, ?> recordDateColm;
     @FXML private TextField txtDiagnosis;
     @FXML private TextField txtPrescription;
     @FXML private DatePicker txtRecordDate;
@@ -141,7 +138,7 @@ public class sceneController3 implements Initializable {
 					+ "SET patient_id = '" + txtPatientID.getText() + "', "
 					+ "appointment_date = '" + java.sql.Date.valueOf(txtApptDate.getValue()) + "', "
 					+ "status = '" + selectStatus.getValue() + "'"
-					+ "WHERE id = " + selectedAppointment.getId() +";";	
+					+ "WHERE id = " + selectedAppointment.getId() + ";";	
 			
 			stmt.executeUpdate(sql); // executes the query.
 			loadAppointments(null); // refreshes the table.
@@ -183,7 +180,7 @@ public class sceneController3 implements Initializable {
 		        new Alert(Alert.AlertType.WARNING, "Please select an appointment to delete.").show();
 		    }
 		} catch (SQLException e) {
-			new Alert(Alert.AlertType.ERROR, "Database Error").show();;
+			new Alert(Alert.AlertType.ERROR, "Database Error").show();
 		}
 	}
 
@@ -206,6 +203,7 @@ public class sceneController3 implements Initializable {
 	}
 	
 	public void switchToScene1(ActionEvent event) throws IOException{
+		new Alert(Alert.AlertType.INFORMATION, "Logged out.").show();
 		Session.clear(); // clears the session / log out.
 		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();

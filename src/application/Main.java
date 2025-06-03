@@ -16,7 +16,6 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.centerOnScreen();
 			primaryStage.setResizable(false);
-//			primaryStage.setFullScreen(true);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -46,17 +45,6 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button layoutX="9.0" layoutY="115.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="136.0" text="Manage Users" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="Arial Bold" size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Button>
       <ImageView fitHeight="42.0" fitWidth="53.0" layoutX="57.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Downloads/image%20(4).png" />
@@ -64,32 +52,29 @@
       </ImageView>
       <TableView fx:id="UsersTable" layoutX="179.0" layoutY="160.0" prefHeight="390.0" prefWidth="707.0">
         <columns>
-          <TableColumn fx:id="userId" prefWidth="142.0" text="id" />
-          <TableColumn fx:id="usernameColm" prefWidth="432.0" text="Username" />
-            <TableColumn fx:id="userRoleColm" prefWidth="132.0" text="Role" />
+          <TableColumn fx:id="userId" prefWidth="52.0" text="id" />
+          <TableColumn fx:id="usernameColm" prefWidth="109.0" text="Username" />
+            <TableColumn fx:id="firstnameColm" prefWidth="118.0" text="First Name" />
+            <TableColumn fx:id="lastnameColm" prefWidth="112.0" text="Last Name" />
+            <TableColumn fx:id="userEmailColm" prefWidth="129.0" text="Email" />
+            <TableColumn fx:id="userPasswordColm" prefWidth="98.0" text="Password" />
+            <TableColumn fx:id="userRoleColm" prefWidth="87.0" text="Role" />
         </columns>
       </TableView>
-      <Button layoutX="267.0" layoutY="567.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Add User" />
-      <Button layoutX="398.0" layoutY="567.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Edit User" />
-      <Button layoutX="530.0" layoutY="567.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Update User" />
-      <Button layoutX="663.0" layoutY="567.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Delete User" />
-      <TextField fx:id="txtUsername" layoutX="6.0" layoutY="364.0" prefHeight="25.0" prefWidth="143.0" promptText="Username" />
-      <Button layoutX="10.0" layoutY="201.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="136.0" text="Manage Appointments" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Button>
-      <ComboBox fx:id="roleSelectionCmbox" layoutX="6.0" layoutY="396.0" prefHeight="25.0" prefWidth="143.0" promptText="Role" />
+      <Button layoutX="267.0" layoutY="567.0" mnemonicParsing="false" onAction="#addUser" prefHeight="50.0" prefWidth="114.0" text="Add User" />
+      <Button layoutX="398.0" layoutY="567.0" mnemonicParsing="false" onAction="#editUser" prefHeight="50.0" prefWidth="114.0" text="Edit User" />
+      <Button layoutX="530.0" layoutY="567.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="50.0" prefWidth="114.0" text="Update User" />
+      <Button layoutX="663.0" layoutY="567.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="50.0" prefWidth="114.0" text="Delete User" />
+      <TextField fx:id="txtUsername" layoutX="6.0" layoutY="208.0" prefHeight="25.0" prefWidth="143.0" promptText="Username" />
+      <ComboBox fx:id="roleSelectionComboBox" layoutX="7.0" layoutY="380.0" prefHeight="25.0" prefWidth="143.0" promptText="Role" />
       <Label alignment="CENTER" layoutX="156.0" layoutY="91.0" prefHeight="59.0" prefWidth="747.0" text="Manage Users">
          <font>
             <Font name="Arial Bold" size="44.0" />
          </font>
       </Label>
+      <TextField fx:id="txtEmail" layoutX="7.0" layoutY="310.0" prefHeight="25.0" prefWidth="143.0" promptText="Email" />
+      <TextField fx:id="txtPassword" layoutX="7.0" layoutY="344.0" prefHeight="25.0" prefWidth="143.0" promptText="Password" />
+      <TextField fx:id="txtFirstName" layoutX="7.0" layoutY="242.0" prefHeight="25.0" prefWidth="143.0" promptText="Firstname" />
+      <TextField fx:id="txtLastName" layoutX="7.0" layoutY="275.0" prefHeight="25.0" prefWidth="143.0" promptText="Lastname" />
    </children>
 </AnchorPane>

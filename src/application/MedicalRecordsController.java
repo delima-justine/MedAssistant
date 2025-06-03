@@ -144,14 +144,12 @@ public class MedicalRecordsController implements Initializable{
 	}
 	
 	public void addMedicalRecord(ActionEvent event) throws SQLException {
-//		Integer count = medicalRecordsTable.getItems().size() + 1;
 		String patientId = txtPatientID.getText().trim();
 		String doctor_diagnosis = txtDiagnosis.getText().trim();
 		String doctor_prescription = txtPrescription.getText().trim();
 		LocalDate record_date = txtRecordDate.getValue();
-//		MedicalRecord newRecord = new MedicalRecord(count, patientId, doctor_diagnosis, doctor_prescription, record_date);
 		
-		// Add the record to the table view.
+		// Add the record to the table view.aa
 		try(Connection conn = MedAssistantDB.getConnection()) {
 			if (!patientId.isEmpty() && 
 				!doctor_diagnosis.isEmpty() && 

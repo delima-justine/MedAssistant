@@ -57,7 +57,6 @@ public class sceneController3 implements Initializable {
 	
 	public void setGreeting(String fullname) throws SQLException {	
 		this.fullname = fullname;
-		System.out.println(fullname);
 		greetingLabel.setText("Good day, Dr. " + Session.getFullname());
 		loadAppointments(null); // load information.
 	}
@@ -104,7 +103,6 @@ public class sceneController3 implements Initializable {
 			Statement stmt = conn.createStatement();
 			String sql = "SELECT * FROM Appointments WHERE doctor_name = '" + Session.getFullname() + "';";
 			ResultSet rs = stmt.executeQuery(sql);
-			System.out.println("Success Fetch.");
 			
 			while(rs.next()) {
 				Appointment newAppointment = new Appointment(

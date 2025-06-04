@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Scene2Controller">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e365" height="471.0" layoutX="13.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 100px; -fx-arc-height: 100em;" width="534.0" />
       <Label alignment="CENTER" layoutY="62.0" prefHeight="68.0" prefWidth="560.0" text="Login">
          <font>
             <Font name="Consolas Bold" size="28.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" layoutX="219.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="122.0" text="Login" />
-      <Button layoutX="221.0" layoutY="382.0" mnemonicParsing="false" onAction="#switchToScene1" text="Back to main menu" />
-      <TextField fx:id="emailTextField" layoutX="143.0" layoutY="144.0" prefHeight="45.0" prefWidth="274.0" promptText="Email" />
-      <TextField fx:id="passwordTextField" layoutX="143.0" layoutY="203.0" prefHeight="45.0" prefWidth="274.0" promptText="Password" />
+      <Button fx:id="loginButton" layoutX="219.0" layoutY="327.0" mnemonicParsing="false" onAction="#login" prefHeight="37.0" prefWidth="122.0" style="-fx-background-color: maroon;" text="Login" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Button layoutX="208.0" layoutY="381.0" mnemonicParsing="false" onAction="#switchToScene1" text="Back to main dashboard">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <TextField fx:id="emailTextField" layoutX="143.0" layoutY="144.0" prefHeight="45.0" prefWidth="274.0" promptText="Email">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <TextField fx:id="passwordTextField" layoutX="143.0" layoutY="203.0" prefHeight="45.0" prefWidth="274.0" promptText="Password">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
       <ComboBox fx:id="roleSelectionLogin" layoutX="205.0" layoutY="268.0" prefWidth="150.0" promptText="Role" visibleRowCount="4" />
+      <Circle fill="#a6b2b229" layoutX="25.0" layoutY="36.0" radius="100.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#a6b2b223" layoutX="517.0" layoutY="427.0" radius="100.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#a8b4b54a" layoutX="592.0" layoutY="-22.0" radius="100.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#a8b4b54a" layoutX="-47.0" layoutY="494.0" radius="100.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

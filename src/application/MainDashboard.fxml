@@ -16,20 +16,22 @@
    <center>
       <AnchorPane prefHeight="534.0" prefWidth="700.0" style="-fx-background-color: maroon;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutY="107.0" prefHeight="81.0" prefWidth="700.0" style="-fx-background-color: white;" text="Welcome to MedAssistant">
-               <font>
-                  <Font name="Consolas Bold" size="36.0" />
-               </font>
-               <effect>
-                  <DropShadow height="38.59" radius="14.3975" spread="0.11" />
-               </effect>
-            </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="97.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0">
+            <ImageView fitHeight="534.0" fitWidth="462.0" layoutX="266.0" layoutY="-3.0" opacity="0.55" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../../Downloads/bright-vibrant-cartoon-hospital-interior-featuring-long-hallway-colorful-decor-lively-d-showcases-corridor-blue-walls-353244754.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="548.0" fitWidth="509.0" layoutX="219.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/Untitled%20design%20(2).png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="534.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="270.0">
                <effect>
                   <DropShadow blurType="GAUSSIAN" height="64.97" radius="20.9925" spread="0.18" />
                </effect>
             </Rectangle>
-            <Button layoutX="178.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" styleClass="loginBtn" stylesheets="@application.css" text="Login" textFill="WHITE">
+            <Button layoutX="74.0" layoutY="294.0" mnemonicParsing="false" onAction="#switchToLoginForm" prefHeight="36.0" prefWidth="123.0" styleClass="loginBtn" stylesheets="@application.css" text="Login" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="14.0" />
                </font>
@@ -39,7 +41,7 @@
                <effect>
                   <InnerShadow />
                </effect></Button>
-            <Button layoutX="400.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToRegisterForm" prefHeight="36.0" prefWidth="123.0" styleClass="registerBtn" stylesheets="@application.css" text="Register" textFill="WHITE">
+            <Button layoutX="74.0" layoutY="350.0" mnemonicParsing="false" onAction="#switchToRegisterForm" prefHeight="36.0" prefWidth="123.0" styleClass="registerBtn" stylesheets="@application.css" text="Register" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="14.0" />
                </font>
@@ -49,11 +51,16 @@
                <effect>
                   <InnerShadow />
                </effect></Button>
-            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="314.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="98.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/image%20(4).png" />
+                  <Image url="@../../../../../Downloads/stethoscope-medical-tool.png" />
                </image>
             </ImageView>
+            <Label alignment="CENTER" layoutY="120.0" prefHeight="155.0" prefWidth="270.0" text="MedAssistant">
+               <font>
+                  <Font name="Franklin Gothic Medium Cond" size="40.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

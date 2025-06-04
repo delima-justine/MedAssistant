@@ -23,16 +23,6 @@
             <DropShadow />
          </effect></Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
-      <Label fx:id="emailLabel" alignment="CENTER" layoutX="512.0" layoutY="41.0" prefHeight="42.0" prefWidth="274.0" text="Role: Staff">
-         <font>
-            <Font name="System Bold" size="21.0" />
-         </font>
-      </Label>
-      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="439.0" layoutY="23.0" prefHeight="42.0" prefWidth="282.0" text="Email: sample@gmail.com">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
       <Button layoutX="31.0" layoutY="560.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="50.0" prefWidth="94.0" text="Logout">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -40,11 +30,6 @@
       <Label layoutX="25.0" layoutY="16.0" prefHeight="50.0" prefWidth="586.0" text="Staff Dashboard" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="561.0" layoutY="22.0" prefHeight="42.0" prefWidth="274.0" text="Password: ************">
-         <font>
-            <Font size="22.0" />
          </font>
       </Label>
       <Button layoutX="12.0" layoutY="228.0" mnemonicParsing="false" onAction="#switchToViewPatients" prefHeight="74.0" prefWidth="132.0" text="View Patients" textAlignment="CENTER" wrapText="true">

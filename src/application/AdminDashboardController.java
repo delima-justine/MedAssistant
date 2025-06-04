@@ -142,11 +142,15 @@ public class AdminDashboardController implements Initializable {
 	        		}
 	        		
 	        		txtUsername.clear();
+	            	txtFirstName.clear();
+	            	txtLastName.clear();
 	            	txtEmail.clear();
 	            	txtPassword.clear();
+	            	txtContact.clear();
+	            	birthdatePicker.setValue(null);
 	            	roleSelectionComboBox.setValue(null);
 	        	} catch(SQLException e) {
-	        		new Alert(Alert.AlertType.ERROR, "Database Error.").show();
+	        		new Alert(Alert.AlertType.ERROR, "Error.").show();
 	        	}
     	} else {
     		new Alert(Alert.AlertType.WARNING, "Please fill all the fields.").show();
@@ -170,7 +174,7 @@ public class AdminDashboardController implements Initializable {
 	    					+ "email = '" + txtEmail.getText() + "', "
 	    					+ "password = '" + txtPassword.getText() + "', "
 	    					+ "birthdate = '" + java.sql.Date.valueOf(birthdatePicker.getValue()) +"', "
-	    					+ "role = '" + roleSelectionComboBox.getValue() + "' "
+	    					+ "role = '" + roleSelectionComboBox.getValue() + "', "
 	    					+ "contact_number = '" + txtContact.getText() + "'"
 	    					+ "WHERE id = " + selectedUser.getUserId() + ";";
 	    		stmt.executeUpdate(sql);
@@ -178,7 +182,16 @@ public class AdminDashboardController implements Initializable {
 	    	} catch(SQLException e) {
 	    		new Alert(Alert.AlertType.ERROR, "Database Error").show();
     	}
+    	
     	UsersTable.refresh();
+    	txtUsername.clear();
+    	txtFirstName.clear();
+    	txtLastName.clear();
+    	txtEmail.clear();
+    	txtPassword.clear();
+    	txtContact.clear();
+    	birthdatePicker.setValue(null);
+    	roleSelectionComboBox.setValue(null);
     }
     
     public void editUser(ActionEvent event) {
@@ -190,6 +203,8 @@ public class AdminDashboardController implements Initializable {
     		txtLastName.setText(selectedUser.getUserLastName());
     		txtEmail.setText(selectedUser.getUserEmail());
     		txtPassword.setText(selectedUser.getUserPassword());
+    		txtContact.setText(selectedUser.getUserContact());
+    		birthdatePicker.setValue(selectedUser.getUserBirthdate());
     		roleSelectionComboBox.setValue(selectedUser.getRole());
     	} else {
     		new Alert(Alert.AlertType.WARNING, "Please select a user.").show();
@@ -212,7 +227,7 @@ public class AdminDashboardController implements Initializable {
 	    		new Alert(Alert.AlertType.WARNING, "Please select a user.").show();
 	    	}
     	} catch(SQLException e) {
-    		new Alert(Alert.AlertType.ERROR, "Database Error");
+    		new Alert(Alert.AlertType.ERROR, "Error Deletion").show();
     	}
     }
 
@@ -227,7 +242,7 @@ public class AdminDashboardController implements Initializable {
 		firstnameColm.setCellValueFactory(new PropertyValueFactory<User, String>("userFirstName"));
 		lastnameColm.setCellValueFactory(new PropertyValueFactory<User, String>("userLastName"));
 		Birthdate.setCellValueFactory(new PropertyValueFactory<User, String>("userBirthdate"));
-		contactColm.setCellValueFactory(new PropertyValueFactory<User, String>("userBirthdate"));
+		contactColm.setCellValueFactory(new PropertyValueFactory<User, String>("userContact"));
 		
 //		UsersTable.setItems(initialData()); // Adds the initial data
 		try {

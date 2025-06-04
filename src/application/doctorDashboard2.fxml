@@ -85,7 +85,7 @@
          <effect>
             <DropShadow radius="6.335" width="6.34" />
          </effect></Button>
-      <Button layoutX="26.0" layoutY="441.0" mnemonicParsing="false" onAction="#deleteMedicalRecord" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: maroon;" text="Delete Record" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button layoutX="26.0" layoutY="441.0" mnemonicParsing="false" onAction="#deleteMedicalRecord" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: #A31D1D;" text="Delete Record" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

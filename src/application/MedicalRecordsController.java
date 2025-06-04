@@ -85,6 +85,7 @@ public class MedicalRecordsController implements Initializable{
 	}
 
     public void switchToScene1(ActionEvent event) throws IOException{
+    	new Alert(Alert.AlertType.INFORMATION, "Logged out.").showAndWait();
     	Session.clear(); // clears the session / log out.
 		root = FXMLLoader.load(getClass().getResource("MainDashboard.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();

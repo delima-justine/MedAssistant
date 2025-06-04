@@ -67,7 +67,7 @@
             <Font name="Consolas Bold" size="49.0" />
          </font>
       </Label>
-      <Button fx:id="insertBtn" layoutX="26.0" layoutY="441.0" mnemonicParsing="false" onAction="#insertAppointment" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: green;" text="Add Appointment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button fx:id="insertBtn" layoutX="274.0" layoutY="548.0" mnemonicParsing="false" onAction="#insertAppointment" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: green;" text="Add Appointment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
@@ -78,23 +78,23 @@
                </input>
             </InnerShadow>
          </effect></Button>
-      <Button layoutX="462.0" layoutY="543.0" mnemonicParsing="false" onAction="#updateAppointment" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: orange;" text="Update Appointment" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="542.0" layoutY="548.0" mnemonicParsing="false" onAction="#updateAppointment" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: orange;" text="Update Appointment" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>
          <effect>
             <DropShadow radius="6.335" width="6.34" />
          </effect></Button>
-      <Button layoutX="598.0" layoutY="543.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: maroon;" text="Delete Appointment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button layoutX="678.0" layoutY="548.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="46.0" prefWidth="119.0" style="-fx-background-color: maroon;" text="Delete Appointment" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
          <effect>
             <DropShadow radius="6.335" width="6.34" />
          </effect></Button>
-      <TextField fx:id="txtPatientID" layoutX="11.0" layoutY="328.0" prefHeight="25.0" prefWidth="149.0" promptText="Patient ID" />
-      <ComboBox fx:id="selectStatus" layoutX="11.0" layoutY="393.0" prefHeight="25.0" prefWidth="149.0" promptText="Status" />
-      <DatePicker fx:id="txtApptDate" layoutX="11.0" layoutY="361.0" prefHeight="25.0" prefWidth="149.0" promptText="Appt. Date" />
+      <TextField fx:id="txtPatientID" layoutX="13.0" layoutY="340.0" prefHeight="25.0" prefWidth="149.0" promptText="Patient ID" />
+      <ComboBox fx:id="selectStatus" layoutX="13.0" layoutY="405.0" prefHeight="25.0" prefWidth="149.0" promptText="Status" />
+      <DatePicker fx:id="txtApptDate" layoutX="13.0" layoutY="373.0" prefHeight="25.0" prefWidth="149.0" promptText="Appt. Date" />
       <Button layoutX="17.0" layoutY="203.0" mnemonicParsing="false" onAction="#switchToMedicalRecords" prefHeight="74.0" prefWidth="140.0" text="Manage Medical Records" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="16.0" />
@@ -106,7 +106,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="326.0" layoutY="543.0" mnemonicParsing="false" onAction="#editAppointment" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: #2196F3;" text="Edit Appointment" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="411.0" layoutY="548.0" mnemonicParsing="false" onAction="#editAppointment" prefHeight="46.0" prefWidth="117.0" style="-fx-background-color: #2196F3;" text="Edit Appointment" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

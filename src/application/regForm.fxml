@@ -1,80 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Scene2Controller">
    <children>
-      <Label alignment="CENTER" layoutY="28.0" prefHeight="39.0" prefWidth="684.0" text="Create an account">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e3e3e365" height="651.0" layoutX="9.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-width: 100px; -fx-arc-height: 100em;" width="663.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="81.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="683.0" />
+      <Label alignment="CENTER" layoutY="28.0" prefHeight="39.0" prefWidth="684.0" text="Create an account" textFill="WHITE">
          <font>
             <Font name="Consolas Bold" size="33.0" />
          </font>
       </Label>
-      <TextField fx:id="firstNameTextField" layoutX="265.0" layoutY="126.0" prefHeight="25.0" prefWidth="287.0" promptText="First Name" />
-      <TextField fx:id="lastNameTextField" layoutX="265.0" layoutY="163.0" prefHeight="25.0" prefWidth="287.0" promptText="Last Name" />
-      <TextField fx:id="emailTextField" layoutX="265.0" layoutY="205.0" prefHeight="25.0" prefWidth="287.0" promptText="Email" />
-      <TextField fx:id="ageTextField" layoutX="265.0" layoutY="243.0" prefHeight="25.0" prefWidth="198.0" promptText="Age" />
-      <TextField fx:id="passwordTextField" layoutX="265.0" layoutY="283.0" prefHeight="25.0" prefWidth="287.0" promptText="Password" />
-      <TextField fx:id="houseNumberTextField" layoutX="265.0" layoutY="362.0" prefHeight="25.0" prefWidth="130.0" promptText="House Number" />
-      <TextField fx:id="cityTextField" layoutX="409.0" layoutY="362.0" prefHeight="25.0" prefWidth="141.0" promptText="City" />
-      <TextField fx:id="streetTextField" layoutX="265.0" layoutY="401.0" prefHeight="25.0" prefWidth="130.0" promptText="Street" />
-      <TextField fx:id="barangayTextField" layoutX="409.0" layoutY="401.0" prefHeight="25.0" prefWidth="141.0" promptText="Barangay" />
-      <TextField fx:id="contactTextField" layoutX="265.0" layoutY="439.0" prefHeight="25.0" prefWidth="287.0" promptText="Contact Number (09-XXXXXXXXX)" />
-      <Label layoutX="124.0" layoutY="130.0" prefHeight="17.0" prefWidth="119.0" text="First Name">
+      <TextField fx:id="firstNameTextField" layoutX="265.0" layoutY="143.0" prefHeight="25.0" prefWidth="287.0" promptText="First Name" />
+      <TextField fx:id="lastNameTextField" layoutX="265.0" layoutY="180.0" prefHeight="25.0" prefWidth="287.0" promptText="Last Name" />
+      <TextField fx:id="emailTextField" layoutX="265.0" layoutY="222.0" prefHeight="25.0" prefWidth="287.0" promptText="Email" />
+      <TextField fx:id="ageTextField" layoutX="265.0" layoutY="260.0" prefHeight="25.0" prefWidth="198.0" promptText="Age" />
+      <TextField fx:id="passwordTextField" layoutX="265.0" layoutY="300.0" prefHeight="25.0" prefWidth="287.0" promptText="Password" />
+      <TextField fx:id="houseNumberTextField" layoutX="265.0" layoutY="379.0" prefHeight="25.0" prefWidth="130.0" promptText="House Number" />
+      <TextField fx:id="cityTextField" layoutX="409.0" layoutY="379.0" prefHeight="25.0" prefWidth="141.0" promptText="City" />
+      <TextField fx:id="streetTextField" layoutX="265.0" layoutY="418.0" prefHeight="25.0" prefWidth="130.0" promptText="Street" />
+      <TextField fx:id="barangayTextField" layoutX="409.0" layoutY="418.0" prefHeight="25.0" prefWidth="141.0" promptText="Barangay" />
+      <TextField fx:id="contactTextField" layoutX="265.0" layoutY="456.0" prefHeight="25.0" prefWidth="287.0" promptText="Contact Number (09-XXXXXXXXX)" />
+      <Label layoutX="124.0" layoutY="147.0" prefHeight="17.0" prefWidth="119.0" text="First Name">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="165.0" prefHeight="17.0" prefWidth="119.0" text="Last Name">
+      <Label layoutX="124.0" layoutY="182.0" prefHeight="17.0" prefWidth="119.0" text="Last Name">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="207.0" prefHeight="17.0" prefWidth="119.0" text="Email">
+      <Label layoutX="124.0" layoutY="224.0" prefHeight="17.0" prefWidth="119.0" text="Email">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="245.0" prefHeight="17.0" prefWidth="119.0" text="Age">
+      <Label layoutX="124.0" layoutY="262.0" prefHeight="17.0" prefWidth="119.0" text="Age">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="285.0" prefHeight="17.0" prefWidth="119.0" text="Password">
+      <Label layoutX="124.0" layoutY="302.0" prefHeight="17.0" prefWidth="119.0" text="Password">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="322.0" prefHeight="17.0" prefWidth="119.0" text="Birthdate">
+      <Label layoutX="124.0" layoutY="339.0" prefHeight="17.0" prefWidth="119.0" text="Birthdate">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="384.0" prefHeight="17.0" prefWidth="119.0" text="Address">
+      <Label layoutX="124.0" layoutY="401.0" prefHeight="17.0" prefWidth="119.0" text="Address">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Label layoutX="124.0" layoutY="441.0" prefHeight="17.0" prefWidth="119.0" text="Contact No.">
+      <Label layoutX="124.0" layoutY="458.0" prefHeight="17.0" prefWidth="119.0" text="Contact No.">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <Button layoutX="264.0" layoutY="552.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="164.0" text="Register" />
-      <Button layoutX="287.0" layoutY="599.0" mnemonicParsing="false" onAction="#switchToScene1" text="Back to main menu" />
-      <ComboBox fx:id="roleSelectionLogin" layoutX="358.0" layoutY="490.0" prefWidth="150.0" promptText="Role" visibleRowCount="4" />
-      <Label layoutX="124.0" layoutY="92.0" prefHeight="17.0" prefWidth="119.0" text="Username">
+      <Button layoutX="264.0" layoutY="559.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="164.0" style="-fx-background-color: maroon;" text="Register" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Button layoutX="274.0" layoutY="604.0" mnemonicParsing="false" onAction="#switchToScene1" text="Back to main dashboard">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ComboBox fx:id="roleSelectionLogin" layoutX="358.0" layoutY="507.0" prefWidth="150.0" promptText="Role" visibleRowCount="4" />
+      <Label layoutX="124.0" layoutY="109.0" prefHeight="17.0" prefWidth="119.0" text="Username">
          <font>
             <Font name="Consolas" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField" layoutX="265.0" layoutY="90.0" prefHeight="25.0" prefWidth="287.0" promptText="Username" />
-      <DatePicker fx:id="birthdatePicker" editable="false" layoutX="265.0" layoutY="320.0" prefHeight="25.0" prefWidth="198.0" promptText="Birthdate (mm/dd/yyyy)" />
-      <ComboBox fx:id="genderSelectionRegister" layoutX="183.0" layoutY="490.0" prefWidth="150.0" promptText="Gender" />
+      <TextField fx:id="usernameTextField" layoutX="265.0" layoutY="107.0" prefHeight="25.0" prefWidth="287.0" promptText="Username" />
+      <DatePicker fx:id="birthdatePicker" editable="false" layoutX="265.0" layoutY="337.0" prefHeight="25.0" prefWidth="198.0" promptText="Birthdate (mm/dd/yyyy)" />
+      <ComboBox fx:id="genderSelectionRegister" layoutX="183.0" layoutY="507.0" prefWidth="150.0" promptText="Gender" />
    </children>
 </AnchorPane>

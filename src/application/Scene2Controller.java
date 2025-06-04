@@ -70,7 +70,6 @@ public class Scene2Controller implements Initializable {
 	}
 		
 	public void login(ActionEvent event) throws IOException, SQLException{
-		
 		String user_email = emailTextField.getText(); 
 		String user_password = passwordTextField.getText();
 		String user_role = roleSelectionLogin.getValue();

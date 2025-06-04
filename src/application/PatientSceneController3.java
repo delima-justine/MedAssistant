@@ -91,7 +91,7 @@ public class PatientSceneController3 implements Initializable {
     				+ "INNER JOIN MedicalRecords ON "
     				+ "Appointments.patient_id=MedicalRecords.patient_id "
     				+ "WHERE Appointments.patient_id = " + Session.getPatientId() + ";";
-    		
+    			
     		ResultSet rs = stmt.executeQuery(sql);
     		System.out.println(Session.getPatientId());
     		

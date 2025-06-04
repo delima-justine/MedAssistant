@@ -70,10 +70,5 @@
             <Font name="System Bold" size="51.0" />
          </font>
       </Label>
-      <Label fx:id="greetingLabel" layoutX="531.0" layoutY="30.0" prefHeight="36.0" prefWidth="328.0" text="Logged in as, [name]" textFill="WHITE">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

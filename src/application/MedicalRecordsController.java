@@ -118,7 +118,13 @@ public class MedicalRecordsController implements Initializable{
 		
 		try(Connection conn = MedAssistantDB.getConnection()) {
 			Statement stmt = conn.createStatement();
-			String sql = "SELECT * FROM MedicalRecords;";
+			String sql = "SELECT "
+					+ "id, "
+					+ "patient_id, "
+					+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', diagnosis)) AS diagnosis, "
+					+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', prescription)) AS prescription, "
+					+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', record_date)) AS record_date "
+					+ "FROM MedicalRecords;";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()) {
@@ -154,10 +160,11 @@ public class MedicalRecordsController implements Initializable{
 				String sql = "INSERT INTO MedicalRecords"
 						+ "(patient_id, diagnosis, prescription, record_date)"
 						+ "VALUES('"
-						+ patientId + "', '"
-						+ doctor_diagnosis + "', '" 
-						+ doctor_prescription + "', '"
-						+ java.sql.Date.valueOf(record_date) + "'); ";
+						+ patientId + "', "
+						+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + doctor_diagnosis + "')), " 
+						+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + doctor_prescription + "')), "
+						+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + java.sql.Date.valueOf(record_date) + "')) "
+						+ "); ";
 //				medicalRecordsTable.getItems().add(newRecord);
 				stmt.executeUpdate(sql);
 				loadMedicalRecords(null);
@@ -187,9 +194,9 @@ public class MedicalRecordsController implements Initializable{
 			Statement stmt = conn.createStatement();
 			String sql = "UPDATE MedicalRecords "
 					+ "SET patient_id = '" + txtPatientID.getText() + "', "
-					+ "diagnosis = '" + txtDiagnosis.getText() + "', "
-					+ "prescription = '" + txtPrescription.getText() +"', "
-					+ "record_date = '" + java.sql.Date.valueOf(txtRecordDate.getValue()) + "'"
+					+ "diagnosis = CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + txtDiagnosis.getText() + "')), "
+					+ "prescription = CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" +  txtPrescription.getText() + "')), "
+					+ "record_date = CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + java.sql.Date.valueOf(txtRecordDate.getValue()) + "'))"
 					+ "WHERE id = " + selectedMedicalRecord.getMedicalId() + ";";
 			
 			stmt.executeUpdate(sql);

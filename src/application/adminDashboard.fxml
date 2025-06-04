@@ -35,16 +35,6 @@
             <DropShadow />
          </effect></Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
-      <Label fx:id="emailLabel" alignment="CENTER" layoutX="457.0" layoutY="23.0" prefHeight="42.0" prefWidth="243.0" text="Email: sample@gmail.com">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
-      <Label fx:id="passwordLabel" alignment="CENTER" layoutX="580.0" layoutY="23.0" prefHeight="42.0" prefWidth="243.0" text="Password: ***********">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
       <Button layoutX="31.0" layoutY="560.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="50.0" prefWidth="94.0" text="Logout">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -52,11 +42,6 @@
       <Label layoutX="38.0" layoutY="19.0" prefHeight="38.0" prefWidth="543.0" text="Admin Dashboard" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="roleSelectionLabel" alignment="CENTER" layoutX="477.0" layoutY="27.0" prefHeight="42.0" prefWidth="243.0" text="Role: Admin">
-         <font>
-            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
       <ImageView fitHeight="42.0" fitWidth="53.0" layoutX="57.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">

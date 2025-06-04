@@ -99,8 +99,7 @@ public class Scene2Controller implements Initializable {
                 Statement stmt = conn.createStatement();
                 String sql = "SELECT * FROM UsersInformation WHERE email = '" + 
                 		       user_email + 
-                		       "' AND password = '" + 
-                		       user_password + "' "
+                		       "' AND password = HASHBYTES('SHA2_256', '" + user_password + "') "
                 		       + " AND role = '" + user_role + "'";
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -129,7 +128,8 @@ public class Scene2Controller implements Initializable {
 						Statement stmt = conn.createStatement();
 						String sql = "SELECT p.patient_id\r\n"
 								+ "FROM patients p\r\n"
-								+ "JOIN usersinformation u ON p.contact_number = u.contact_number\r\n"
+								+ "JOIN usersinformation u ON "
+								+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', p.contact_number)) = u.contact_number\r\n"
 								+ "WHERE u.email ='" + user_email +"'; ";
 						
 						ResultSet rs = stmt.executeQuery(sql);
@@ -150,7 +150,6 @@ public class Scene2Controller implements Initializable {
 					stage.setScene(scene);
 					stage.centerOnScreen();
 					stage.show();
-					System.out.println(Session.getPatientId());
 					break;
 				case "Doctor":
 					fxml_scene = "doctorDashboard.fxml";
@@ -310,8 +309,8 @@ public class Scene2Controller implements Initializable {
 		                		+ "barangay, city, role, contact_number) "
 		                		+ "VALUES ('"
 		                		+ username + "', '"
-		                		+ user_email + "', '"
-		                		+ user_password + "', '"
+		                		+ user_email + "', "
+		                		+ "HASHBYTES('SHA2_256', '" + user_password + "'), '"
 		                        + user_firstname + "', '"
 		                        + user_lastname + "', '"
 		                        + user_age + "', '"
@@ -327,12 +326,13 @@ public class Scene2Controller implements Initializable {
 		                setFieldsToBlank();
 		                
 		                if (user_role == "Patient") {
-		                	sql = "INSERT INTO Patients(name, age, gender, contact_number)"
-		                		+ "VALUES('"
-		                		+ user_firstname + " " + user_lastname + "', '"
-		                		+ user_age + "', '"
-		                		+ genderSelectionRegister.getValue() + "', '"
-		                		+ user_contact + "');";
+		                	sql = "INSERT INTO Patients(name, age, gender, contact_number) "
+		                		+ "VALUES( "
+		                		+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + user_firstname + " " + user_lastname + "')), "
+		                		+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + user_age + "')), "
+		                		+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + genderSelectionRegister.getValue() + "')), "
+		                		+ "CONVERT(varbinary(MAX), EncryptByPassPhrase('MyKey', '" + user_contact + "')) "
+		                		+ ");";
 		                	stmt.executeUpdate(sql);
 		                } else {
 		                	return;

@@ -53,7 +53,7 @@ public class sceneController3 implements Initializable {
 	private Parent root;
 	private String fullname;
 	
-	String[] appointmentStatus = {"Done", "Active", "Pending", "Cancelled"};
+	String[] appointmentStatus = {"Done", "Confirmed", "Pending", "Cancelled"};
 	
 	public void setGreeting(String fullname) throws SQLException {	
 		this.fullname = fullname;

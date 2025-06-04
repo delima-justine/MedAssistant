@@ -140,21 +140,22 @@ public class AdminDashboardController implements Initializable {
 	        		} else {
 	        			return;
 	        		}
-	        		
-	        		txtUsername.clear();
-	            	txtFirstName.clear();
-	            	txtLastName.clear();
-	            	txtEmail.clear();
-	            	txtPassword.clear();
-	            	txtContact.clear();
-	            	birthdatePicker.setValue(null);
-	            	roleSelectionComboBox.setValue(null);
+	     
 	        	} catch(SQLException e) {
 	        		new Alert(Alert.AlertType.ERROR, "Error.").show();
 	        	}
     	} else {
     		new Alert(Alert.AlertType.WARNING, "Please fill all the fields.").show();
     	}
+    	
+    	txtUsername.clear();
+    	txtFirstName.clear();
+    	txtLastName.clear();
+    	txtEmail.clear();
+    	txtPassword.clear();
+    	txtContact.clear();
+    	birthdatePicker.setValue(null);
+    	roleSelectionComboBox.setValue(null);
     }
     
     public void updateUser(ActionEvent event) throws SQLException {
@@ -172,7 +173,7 @@ public class AdminDashboardController implements Initializable {
 	    					+ "first_name = '" + txtFirstName.getText() + "', "
 	    					+ "last_name = '" + txtLastName.getText() + "', "
 	    					+ "email = '" + txtEmail.getText() + "', "
-	    					+ "password = '" + txtPassword.getText() + "', "
+	    					+ "password = HASHBYTES('SHA2_256', '" + txtPassword.getText() + "'), "
 	    					+ "birthdate = '" + java.sql.Date.valueOf(birthdatePicker.getValue()) +"', "
 	    					+ "role = '" + roleSelectionComboBox.getValue() + "', "
 	    					+ "contact_number = '" + txtContact.getText() + "'"

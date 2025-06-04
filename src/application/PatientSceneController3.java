@@ -85,15 +85,16 @@ public class PatientSceneController3 implements Initializable {
     	
     	try(Connection conn = MedAssistantDB.getConnection()) {
     		Statement stmt = conn.createStatement();
-    		String sql = "SELECT Appointments.doctor_name, MedicalRecords.diagnosis, "
-    				+ "MedicalRecords.prescription "
+    		String sql = "SELECT "
+    				+ "Appointments.doctor_name, "
+    				+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', MedicalRecords.diagnosis)) AS diagnosis, "
+    				+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', MedicalRecords.prescription)) AS prescription "
     				+ "FROM Appointments "
     				+ "INNER JOIN MedicalRecords ON "
     				+ "Appointments.patient_id=MedicalRecords.patient_id "
     				+ "WHERE Appointments.patient_id = " + Session.getPatientId() + ";";
     			
     		ResultSet rs = stmt.executeQuery(sql);
-    		System.out.println(Session.getPatientId());
     		
     		while(rs.next()) {
     			UserMedicalRecord newRecord = new UserMedicalRecord(

@@ -75,8 +75,12 @@ public class StaffSceneController2 implements Initializable{
     	
     	try(Connection conn = MedAssistantDB.getConnection()) {
     		Statement stmt = conn.createStatement();
-    		String sql = "SELECT Appointments.appointment_id, Appointments.patient_id, "
-    				+ "Patients.name, Appointments.appointment_date, Appointments.status\r\n"
+    		String sql = "SELECT "
+    				+ "Appointments.appointment_id, "
+    				+ "Appointments.patient_id, "
+    				+ "CONVERT(varchar(MAX), DecryptByPassPhrase('MyKey', Patients.name)) as name, "
+    				+ "Appointments.appointment_date, "
+    				+ "Appointments.status\r\n"
     				+ "FROM Appointments\r\n"
     				+ "INNER JOIN Patients ON Appointments.patient_id=Patients.patient_id;";
     		ResultSet rs = stmt.executeQuery(sql);

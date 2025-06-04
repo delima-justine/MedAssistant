@@ -73,7 +73,6 @@ public class Scene2Controller implements Initializable {
 		
 		if (user_email.isEmpty() || user_password.isEmpty()) {
 			Alert alertDialog = new Alert(Alert.AlertType.ERROR);
-//			alertDialog.setTitle("Warning");
 			alertDialog.setHeaderText("Error");
 			alertDialog.setContentText("Please fill all fields.");
 			alertDialog.showAndWait();
@@ -104,6 +103,7 @@ public class Scene2Controller implements Initializable {
                     new Alert(Alert.AlertType.INFORMATION, "Login successful!").showAndWait();
                     full_name = rs.getString("first_name") + " " + rs.getString("last_name");
                     Session.setFullname(full_name); // adds the session.
+                    Session.setEmail(user_email);
                 } else {
                 	// if the user is not found, it will display an invalid alert.
                     new Alert(Alert.AlertType.ERROR, "Invalid credentials.").show();
@@ -118,6 +118,17 @@ public class Scene2Controller implements Initializable {
 				case "Patient":
 					fxml_scene = "patientDashboard.fxml";
 					scene_title = "Patient Dashboard";
+					
+					// Dynamic change of scenes based on the role selected of user.
+					FXMLLoader loader4 = new FXMLLoader(getClass().getResource(fxml_scene));
+					root = loader4.load();
+					
+					stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					scene = new Scene(root);
+					stage.setTitle(scene_title);
+					stage.setScene(scene);
+					stage.centerOnScreen();
+					stage.show();
 					break;
 				case "Doctor":
 					fxml_scene = "doctorDashboard.fxml";

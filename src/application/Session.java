@@ -2,6 +2,7 @@ package application;
 
 public class Session {
 	 private static String fullname;
+	 private static String email;
 
     public static void setFullname(String name) {
         fullname = name;
@@ -10,8 +11,17 @@ public class Session {
     public static String getFullname() {
         return fullname;
     }
+    
+    public static void setEmail(String userEmail) {
+        email = userEmail;
+    }
+
+    public static String getEmail() {
+        return email;
+    }
 
     public static void clear() {
         fullname = null;
+        email = null;
     }
 }

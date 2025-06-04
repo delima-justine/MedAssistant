@@ -3,6 +3,7 @@ package application;
 public class Session {
 	 private static String fullname;
 	 private static String email;
+	 private static Integer patientId;
 
     public static void setFullname(String name) {
         fullname = name;
@@ -19,9 +20,18 @@ public class Session {
     public static String getEmail() {
         return email;
     }
+    
+    public static void setPatientId(Integer id) {
+        patientId = id;
+    }
+
+    public static Integer getPatientId() {
+        return patientId;
+    }
 
     public static void clear() {
         fullname = null;
         email = null;
+        patientId = null;
     }
 }

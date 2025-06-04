@@ -34,7 +34,7 @@ public class StaffSceneController implements Initializable {
     @FXML private TableColumn<Appointment, String> appointmentDateColm;
     @FXML private TableColumn<Appointment, Integer> appointmentIdColm;
     @FXML private TableColumn<Appointment, String> doctorNameColm;
-    @FXML private TableColumn<Appointment, String> patientIdColm;
+    @FXML private TableColumn<Appointment, Integer> patientIdColm;
     @FXML private TableColumn<Appointment, String> statusColm;
     @FXML private ComboBox<String> selectStatus;
     @FXML private Label emailLabel;
@@ -62,13 +62,25 @@ public class StaffSceneController implements Initializable {
 		stage.show();
     }
     
-    ObservableList<Appointment> initialData() {
-    	Appointment appointment1 = new Appointment(1, "P001", "Kathleen Citron", LocalDate.now(), "Pending");
-    	Appointment appointment2 = new Appointment(2, "P002", "Franco Lazaro", LocalDate.now(), "Pending");
-    	return FXCollections.<Appointment> observableArrayList(appointment1, appointment2);
+    public void switchToViewPatients(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("staffDashboard2.fxml"));
+	    root = loader.load();
+
+	    StaffSceneController2 controller = loader.getController();
+	    try {
+			controller.loadPatients(null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setTitle("Staff Dashboard");
+	    stage.setScene(scene);
+	    stage.centerOnScreen();
+	    stage.show();
     }
     
- // Method to insert an appointment.
  	public void insertAppointment(ActionEvent event) throws SQLException {
  		String patient_id = txtPatientId.getText().trim();
  		String doctor_name = txtDoctorName.getText().trim();
@@ -97,6 +109,7 @@ public class StaffSceneController implements Initializable {
  				}
 
  				txtPatientId.clear();
+ 				txtDoctorName.clear();
  				selectAppointmentDate.setValue(null);
  				selectStatus.setValue(null);
  		} else {
@@ -111,12 +124,11 @@ public class StaffSceneController implements Initializable {
  			Statement stmt = conn.createStatement();
  			String sql = "SELECT * FROM Appointments;";
  			ResultSet rs = stmt.executeQuery(sql);
- 			System.out.println("Success Fetch.");
  			
  			while(rs.next()) {
  				Appointment newAppointment = new Appointment(
- 						rs.getInt("id"), 
- 						rs.getString("patient_id"), 
+ 						rs.getInt("appointment_id"), 
+ 						rs.getInt("patient_id"), 
  						rs.getString("doctor_name"), 
  						rs.getDate("appointment_date").toLocalDate(), 
  						rs.getString("status")
@@ -126,7 +138,7 @@ public class StaffSceneController implements Initializable {
  				// Adds the appointmentList to the table.
  				appointmentsTable.setItems(appointmentList);
  			} catch(Exception e) {
- 			System.out.println(e.getMessage());
+ 			new Alert(Alert.AlertType.ERROR, "Error Occured");
  		}
  	}
  	
@@ -146,7 +158,7 @@ public class StaffSceneController implements Initializable {
  					+ "doctor_name = '" + txtDoctorName.getText() + "', "
  					+ "appointment_date = '" + java.sql.Date.valueOf(selectAppointmentDate.getValue()) + "', "
  					+ "status = '" + selectStatus.getValue() + "'"
- 					+ "WHERE id = " + selectedAppointment.getId() + ";";	
+ 					+ "WHERE appointment_id = " + selectedAppointment.getId() + ";";	
  			
  			stmt.executeUpdate(sql); // executes the query.
  			loadAppointments(null); // refreshes the table.
@@ -155,6 +167,11 @@ public class StaffSceneController implements Initializable {
  		} catch(NullPointerException e) {
  			new Alert(Alert.AlertType.ERROR, "Please select a row to update").show();
  		}
+ 		
+ 		 txtDoctorName.clear();
+ 		 txtPatientId.clear();
+ 		 selectAppointmentDate.setValue(null);
+ 		 selectStatus.setValue(null);
  	}
  	
  	// Puts a row to the text fields.
@@ -166,7 +183,7 @@ public class StaffSceneController implements Initializable {
  			return;
  		}
  		
- 		txtPatientId.setText(selectedAppointment.getPatientID());
+ 		txtPatientId.setText(String.valueOf(selectedAppointment.getPatientID()));
  		txtDoctorName.setText(selectedAppointment.getDoctorName());
  		selectAppointmentDate.setValue(selectedAppointment.getAppointmentDate());
  		selectStatus.setValue(selectedAppointment.getStatus());
@@ -182,7 +199,7 @@ public class StaffSceneController implements Initializable {
  		    	Integer appointment_id = selectedAppointment.getId();
  		    	Statement stmt = conn.createStatement();
  		    	
- 		    	String sql = "DELETE FROM Appointments WHERE id = " + appointment_id;
+ 		    	String sql = "DELETE FROM Appointments WHERE appointment_id = " + appointment_id;
  		    	stmt.executeUpdate(sql);
  		    	loadAppointments(null); // updates table view automatically.
  		    } else {
@@ -196,15 +213,13 @@ public class StaffSceneController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		appointmentIdColm.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("id"));
-		patientIdColm.setCellValueFactory(new PropertyValueFactory<Appointment, String>("patientID"));
+		patientIdColm.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("patientID"));
 		doctorNameColm.setCellValueFactory(new PropertyValueFactory<Appointment, String>("doctorName"));
 		appointmentDateColm.setCellValueFactory(new PropertyValueFactory<Appointment, String>("appointmentDate"));
 		statusColm.setCellValueFactory(new PropertyValueFactory<Appointment, String>("status"));
 		
-		appointmentsTable.setItems(initialData());
-		
 		try {
-			loadAppointments(null);
+			loadAppointments(null); // initializes the data from the database to table view.
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -95,12 +95,6 @@ public class MedicalRecordsController implements Initializable{
 		stage.show();
 	}
 	
-	ObservableList<MedicalRecord> InitialData() {
-		MedicalRecord medRec1 = new MedicalRecord(1, "P001", "Fever", "Biogesic", LocalDate.now());
-		MedicalRecord medRec2 = new MedicalRecord(2, "P002", "Sore Throat", "Neozep", LocalDate.now());
-		return FXCollections.<MedicalRecord> observableArrayList(medRec1, medRec2);
-	}
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// 														Dapat same ito nong nasa MedicalRecord class getter and setter.            
@@ -116,7 +110,6 @@ public class MedicalRecordsController implements Initializable{
 			e.printStackTrace();
 		}
 		
-		medicalRecordsTable.setItems(InitialData());
 	}
 	
 	public void loadMedicalRecords(ActionEvent event) throws SQLException {
@@ -201,7 +194,7 @@ public class MedicalRecordsController implements Initializable{
 			stmt.executeUpdate(sql);
 			loadMedicalRecords(null);
 		} catch(SQLException e) {
-			new Alert(Alert.AlertType.ERROR, "Database Error.");
+			new Alert(Alert.AlertType.ERROR, "Patient not found.").show();
 		}
 
 		// Refresh the table

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StaffSceneController2">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="591.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="154.0">
+         <effect>
+            <DropShadow />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
+      <Button layoutX="31.0" layoutY="560.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="50.0" prefWidth="94.0" text="Logout">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="25.0" layoutY="16.0" prefHeight="50.0" prefWidth="586.0" text="Staff Dashboard" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="12.0" layoutY="228.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="132.0" text="View Patient" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="12.0" layoutY="128.0" mnemonicParsing="false" onAction="#switchToAppointments" prefHeight="82.0" prefWidth="132.0" text="Appointment Scheduling" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Arial Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
+      <ImageView fitHeight="42.0" fitWidth="53.0" layoutX="57.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/image%20(4).png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="patientsTable" layoutX="171.0" layoutY="173.0" prefHeight="371.0" prefWidth="719.0">
+        <columns>
+          <TableColumn fx:id="appointmentIdColm" prefWidth="104.0" text="Appointment ID" />
+          <TableColumn fx:id="patientIdColm" prefWidth="131.0" text="Patient ID" />
+            <TableColumn fx:id="patientNameColm" prefWidth="162.0" text="Patient Name" />
+            <TableColumn fx:id="appointmentDateColm" prefWidth="171.0" text="Appointment Date" />
+            <TableColumn fx:id="statusColm" prefWidth="150.0" text="Status" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" layoutX="154.0" layoutY="95.0" prefHeight="67.0" prefWidth="748.0" text="Patients">
+         <font>
+            <Font name="System Bold" size="51.0" />
+         </font>
+      </Label>
+      <Label fx:id="greetingLabel" layoutX="531.0" layoutY="30.0" prefHeight="36.0" prefWidth="328.0" text="Logged in as, [name]" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

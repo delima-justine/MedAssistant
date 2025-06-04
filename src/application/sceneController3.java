@@ -37,7 +37,7 @@ public class sceneController3 implements Initializable {
 	@FXML private ListView<String> managePatientsTable;
 	@FXML private TableView<Appointment> appointmentTable;
 	@FXML private TableColumn<Appointment, Integer> id;
-    @FXML private TableColumn<Appointment, String> patientID;
+    @FXML private TableColumn<Appointment, Integer> patientID;
     @FXML private TableColumn<Appointment, String> doctorName;
 	@FXML private TableColumn<Appointment, String> appointmentDate;
 	@FXML private TableColumn<Appointment, String> status;
@@ -86,7 +86,7 @@ public class sceneController3 implements Initializable {
 //					appointmentTable.getItems().add(newAppointment); - for front end temporary displayed.
 					loadAppointments(null); // to update the table view automatically.
 				} catch(SQLException e) {
-					e.printStackTrace();
+					new Alert(Alert.AlertType.WARNING, "Patient " + patient_id + " doesn't exist").show();
 				}
 
 				txtPatientID.clear();
@@ -108,8 +108,8 @@ public class sceneController3 implements Initializable {
 			
 			while(rs.next()) {
 				Appointment newAppointment = new Appointment(
-						rs.getInt("id"), 
-						rs.getString("patient_id"), 
+						rs.getInt("appointment_id"), 
+						rs.getInt("patient_id"), 
 						rs.getString("doctor_name"), 
 						rs.getDate("appointment_date").toLocalDate(), 
 						rs.getString("status")
@@ -119,7 +119,7 @@ public class sceneController3 implements Initializable {
 				// Adds the appointmentList to the table.
 				appointmentTable.setItems(appointmentList);
 			} catch(Exception e) {
-			System.out.println(e.getMessage());
+			new Alert(Alert.AlertType.ERROR, "Failed to fetch.");
 		}
 	}
 	
@@ -138,12 +138,13 @@ public class sceneController3 implements Initializable {
 					+ "SET patient_id = '" + txtPatientID.getText() + "', "
 					+ "appointment_date = '" + java.sql.Date.valueOf(txtApptDate.getValue()) + "', "
 					+ "status = '" + selectStatus.getValue() + "'"
-					+ "WHERE id = " + selectedAppointment.getId() + ";";	
+					+ "WHERE appointment_id = " + selectedAppointment.getId() + ";";	
 			
 			stmt.executeUpdate(sql); // executes the query.
 			loadAppointments(null); // refreshes the table.
 		} catch(SQLException e) {
-			new Alert(Alert.AlertType.ERROR, "Database Error").show();
+			new Alert(Alert.AlertType.ERROR, "Patient not found."
+					+ "\nPlease select a existing Patient ID.").show();
 		} catch(NullPointerException e) {
 			new Alert(Alert.AlertType.ERROR, "Please select a row to update").show();
 		}
@@ -158,7 +159,7 @@ public class sceneController3 implements Initializable {
 			return;
 		}
 		
-		txtPatientID.setText(selectedAppointment.getPatientID());
+		txtPatientID.setText(String.valueOf(selectedAppointment.getPatientID()));
 		txtApptDate.setValue(selectedAppointment.getAppointmentDate());
 		selectStatus.setValue(selectedAppointment.getStatus());
 	}
@@ -173,7 +174,7 @@ public class sceneController3 implements Initializable {
 		    	Integer appointment_id = selectedAppointment.getId();
 		    	Statement stmt = conn.createStatement();
 		    	
-		    	String sql = "DELETE FROM Appointments WHERE id = " + appointment_id;
+		    	String sql = "DELETE FROM Appointments WHERE appointment_id = " + appointment_id;
 		    	stmt.executeUpdate(sql);
 		    	loadAppointments(null); // updates table view automatically.
 		    } else {
@@ -187,7 +188,7 @@ public class sceneController3 implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		id.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("id"));
-		patientID.setCellValueFactory(new PropertyValueFactory<Appointment, String>("patientID"));
+		patientID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("patientID"));
 		doctorName.setCellValueFactory(new PropertyValueFactory<Appointment, String>("doctorName"));
 		appointmentDate.setCellValueFactory(new PropertyValueFactory<Appointment, String>("appointmentDate"));
 		status.setCellValueFactory(new PropertyValueFactory<Appointment, String>("status"));

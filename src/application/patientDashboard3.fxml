@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientSceneController2">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PatientSceneController3">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#650000" height="577.0" layoutY="73.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="151.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="MAROON" height="74.0" layoutX="-5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="907.0" />
@@ -33,7 +33,7 @@
             <InnerShadow />
          </effect>
       </Button>
-      <Button layoutX="11.0" layoutY="213.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="125.0" text="View Appointments" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="11.0" layoutY="213.0" mnemonicParsing="false" onAction="#switchToViewAppointments" prefHeight="74.0" prefWidth="125.0" text="View Appointments" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
@@ -49,23 +49,22 @@
             <Image url="@../../../../../Downloads/image%20(4).png" />
          </image>
       </ImageView>
-      <TableView fx:id="appointmentTable" layoutX="171.0" layoutY="180.0" prefHeight="423.0" prefWidth="711.0">
+      <TableView fx:id="medicalRecordTable" layoutX="171.0" layoutY="180.0" prefHeight="423.0" prefWidth="711.0">
         <columns>
-          <TableColumn fx:id="patientId" prefWidth="76.33334350585938" text="Patient ID" />
-            <TableColumn fx:id="doctorName" prefWidth="257.66668701171875" text="Doctor Name" />
-            <TableColumn fx:id="appointmentDate" prefWidth="210.33331298828125" text="Appointment Date" />
-            <TableColumn fx:id="status" prefWidth="167.33331298828125" text="Status" />
+            <TableColumn fx:id="doctorNameColm" prefWidth="199.0" text="Doctor Name" />
+            <TableColumn fx:id="diagnosisColm" prefWidth="292.0" text="Diagnosis" />
+            <TableColumn fx:id="prescriptionColm" prefWidth="219.0" text="Prescription" />
         </columns>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TableView>
-      <Label alignment="CENTER" layoutX="170.0" layoutY="101.0" prefHeight="62.0" prefWidth="711.0" text="Appointment/s">
+      <Label alignment="CENTER" layoutX="149.0" layoutY="101.0" prefHeight="62.0" prefWidth="753.0" text="Medical Record">
          <font>
             <Font name="Consolas Bold" size="49.0" />
          </font>
       </Label>
-      <Button layoutX="13.0" layoutY="305.0" mnemonicParsing="false" onAction="#switchToViewMedicalRecords" prefHeight="74.0" prefWidth="125.0" text="View Medical Records" textAlignment="CENTER" wrapText="true">
+      <Button layoutX="13.0" layoutY="305.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="125.0" text="View Medical Records" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>

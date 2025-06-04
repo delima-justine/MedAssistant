@@ -47,7 +47,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Button layoutX="12.0" layoutY="228.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="132.0" text="View Users" wrapText="true">
+      <Button layoutX="12.0" layoutY="228.0" mnemonicParsing="false" onAction="#switchToViewPatients" prefHeight="74.0" prefWidth="132.0" text="View Patients" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -107,5 +107,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <Label alignment="CENTER" layoutX="157.0" layoutY="96.0" prefHeight="65.0" prefWidth="744.0" text="Manage Appointments">
+         <font>
+            <Font name="System Bold" size="43.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

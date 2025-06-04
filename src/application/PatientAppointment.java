@@ -2,59 +2,49 @@ package application;
 
 import java.time.LocalDate;
 
-public class Appointment {
-	private Integer id;
-	private Integer patientID;
+public class PatientAppointment {
+	private Integer patientId;
 	private String doctorName;
 	private LocalDate appointmentDate;
 	private String status;
-
-	public Integer getId() {
-		return id;
+	
+	public Integer getPatientId() {
+		return patientId;
 	}
-
-	public Integer getPatientID() {
-		return patientID;
-	}
-
+	
 	public String getDoctorName() {
 		return doctorName;
 	}
-
+	
 	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
-
+	
 	public String getStatus() {
 		return status;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
 	}
-
-	public void setPatientID(Integer patientID) {
-		this.patientID = patientID;
-	}
-
+	
 	public void setDoctorName(String doctorName) {
 		this.doctorName = doctorName;
 	}
-
+	
 	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
-
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Appointment(Integer id, Integer patientID, String doctorName, LocalDate appt_date, String status) {
+	public PatientAppointment(Integer patientId, String doctorName, LocalDate appointmentDate, String status) {
 		super();
-		this.id = id;
-		this.patientID = patientID;
+		this.patientId = patientId;
 		this.doctorName = doctorName;
-		this.appointmentDate = appt_date;
+		this.appointmentDate = appointmentDate;
 		this.status = status;
 	}
 }

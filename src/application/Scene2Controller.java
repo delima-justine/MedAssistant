@@ -38,8 +38,10 @@ public class Scene2Controller implements Initializable {
 	@FXML private TextField barangayTextField;
 	@FXML private TextField contactTextField;
 	@FXML private ComboBox<String> roleSelectionLogin; 
+    @FXML private ComboBox<String> genderSelectionRegister;
 	
 	String[] roles = {"Patient", "Staff", "Admin", "Doctor"};
+	String[] genders = {"Male", "Female", "Prefer not to say"}; 
 	
 	private Stage stage;
 	private Scene scene;
@@ -47,9 +49,14 @@ public class Scene2Controller implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		roleSelectionLogin.getItems().addAll(roles);
+		if (roleSelectionLogin != null) {
+			roleSelectionLogin.getItems().addAll(roles);
+		}
+		
+		if (genderSelectionRegister != null) {
+			genderSelectionRegister.getItems().addAll(genders);
+		}
 	}
-
 	
 	public void switchToScene1(ActionEvent event) throws IOException{
 		Session.clear(); // clears the session / log out.
@@ -119,6 +126,21 @@ public class Scene2Controller implements Initializable {
 					fxml_scene = "patientDashboard.fxml";
 					scene_title = "Patient Dashboard";
 					
+					try(Connection conn = MedAssistantDB.getConnection()) {
+						Statement stmt = conn.createStatement();
+						String sql = "SELECT p.patient_id\r\n"
+								+ "FROM patients p\r\n"
+								+ "JOIN usersinformation u ON p.contact_number = u.contact_number\r\n"
+								+ "WHERE u.email ='" + user_email +"'; ";
+						
+						ResultSet rs = stmt.executeQuery(sql);
+						
+						while(rs.next()) {
+							// set patient id if patient
+							Session.setPatientId(rs.getInt("patient_id"));
+						} 
+					}
+					
 					// Dynamic change of scenes based on the role selected of user.
 					FXMLLoader loader4 = new FXMLLoader(getClass().getResource(fxml_scene));
 					root = loader4.load();
@@ -129,6 +151,7 @@ public class Scene2Controller implements Initializable {
 					stage.setScene(scene);
 					stage.centerOnScreen();
 					stage.show();
+					System.out.println(Session.getPatientId());
 					break;
 				case "Doctor":
 					fxml_scene = "doctorDashboard.fxml";
@@ -303,6 +326,18 @@ public class Scene2Controller implements Initializable {
 		                stmt.executeUpdate(sql);
 		                new Alert(Alert.AlertType.INFORMATION, "Registration Successful!").show();
 		                setFieldsToBlank();
+		                
+		                if (user_role == "Patient") {
+		                	sql = "INSERT INTO Patients(name, age, gender, contact_number)"
+		                		+ "VALUES('"
+		                		+ user_firstname + " " + user_lastname + "', '"
+		                		+ user_age + "', '"
+		                		+ genderSelectionRegister.getValue() + "', '"
+		                		+ user_contact + "');";
+		                	stmt.executeUpdate(sql);
+		                } else {
+		                	return;
+		                }
 		            } catch (Exception ex) {
 		                new Alert(Alert.AlertType.ERROR, "Error: " + ex.getMessage()).show();
 	            	}

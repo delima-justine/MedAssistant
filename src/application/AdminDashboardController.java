@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,6 +39,8 @@ public class AdminDashboardController implements Initializable {
     @FXML private TextField txtLastName;
     @FXML private TextField txtEmail;
     @FXML private TextField txtPassword;
+    @FXML private TextField txtContact;
+    @FXML private DatePicker birthdatePicker;
     @FXML private TableView<User> UsersTable;
     @FXML private TableColumn<User, Integer> userId;
     @FXML private TableColumn<User, String> userEmailColm;
@@ -45,6 +49,8 @@ public class AdminDashboardController implements Initializable {
     @FXML private TableColumn<User, String> usernameColm;
     @FXML private TableColumn<User, String> firstnameColm;
     @FXML private TableColumn<User, String> lastnameColm;
+    @FXML private TableColumn<User, String> Birthdate;
+    @FXML private TableColumn<User, String> contactColm;
     
     private Stage stage;
    	private Scene scene;
@@ -62,7 +68,7 @@ public class AdminDashboardController implements Initializable {
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.show();
-    }
+    } 
     
     public void loadUsers(ActionEvent event) throws SQLException {
     	ObservableList<User> userList = FXCollections.observableArrayList();  
@@ -70,7 +76,7 @@ public class AdminDashboardController implements Initializable {
     	try(Connection conn = MedAssistantDB.getConnection()) {
     		Statement stmt = conn.createStatement();
     		String sql = "SELECT id, username, first_name, "
-    				+ "last_name, email, password, role "
+    				+ "last_name, email, password, birthdate, contact_number, role "
     				+ "FROM UsersInformation;";
     		ResultSet rs = stmt.executeQuery(sql);
     		
@@ -82,6 +88,8 @@ public class AdminDashboardController implements Initializable {
     					rs.getString("last_name"),
     					rs.getString("email"),
     					rs.getString("password"),
+    					rs.getDate("birthdate").toLocalDate(),
+    					rs.getString("contact_number"),
     					rs.getString("role")
     			);
     			userList.add(newUser);
@@ -99,6 +107,8 @@ public class AdminDashboardController implements Initializable {
     	String newLastName = txtLastName.getText().trim();
     	String newEmail = txtEmail.getText().trim();
     	String newPassword = txtPassword.getText().trim();
+    	String newContact = txtContact.getText().trim();
+    	LocalDate newBirthdate = birthdatePicker.getValue();
     	String newRole = roleSelectionComboBox.getValue();
     	
     	if (!txtUsername.getText().isEmpty() &&  
@@ -108,16 +118,28 @@ public class AdminDashboardController implements Initializable {
 	    		try(Connection conn = MedAssistantDB.getConnection()) {
 	        		Statement stmt = conn.createStatement();
 	        		String sql = "INSERT INTO UsersInformation(username, first_name, "
-	        				+ "last_name, email, password, role)"
+	        				+ "last_name, email, password, birthdate, role, contact_number)"
 	        				+ "VALUES('"
 	        				+ newUsername + "', '"
 	        				+ newFirstName + "', '"
 	        				+ newLastName + "', '"
 	        				+ newEmail + "', '"
 	        				+ newPassword + "', '"
-	        				+ newRole + "');";
+	        				+ java.sql.Date.valueOf(newBirthdate) + "', '"
+	        				+ newRole + "', '"
+	        				+ newContact + "');";
 	        		stmt.executeUpdate(sql);
 	        		loadUsers(null);
+	        		
+	        		if(newRole == "Patient") {
+	        			sql = "INSERT INTO Patients(name, contact_number)"
+		                		+ "VALUES('"
+		                		+ newFirstName + " " + newLastName + "', '"
+		                		+ newContact + "');";
+		                	stmt.executeUpdate(sql);
+	        		} else {
+	        			return;
+	        		}
 	        		
 	        		txtUsername.clear();
 	            	txtEmail.clear();
@@ -129,7 +151,6 @@ public class AdminDashboardController implements Initializable {
     	} else {
     		new Alert(Alert.AlertType.WARNING, "Please fill all the fields.").show();
     	}
-    	
     }
     
     public void updateUser(ActionEvent event) throws SQLException {
@@ -148,7 +169,9 @@ public class AdminDashboardController implements Initializable {
 	    					+ "last_name = '" + txtLastName.getText() + "', "
 	    					+ "email = '" + txtEmail.getText() + "', "
 	    					+ "password = '" + txtPassword.getText() + "', "
-	    					+ "role = '" + roleSelectionComboBox.getValue() + "'"
+	    					+ "birthdate = '" + java.sql.Date.valueOf(birthdatePicker.getValue()) +"', "
+	    					+ "role = '" + roleSelectionComboBox.getValue() + "' "
+	    					+ "contact_number = '" + txtContact.getText() + "'"
 	    					+ "WHERE id = " + selectedUser.getUserId() + ";";
 	    		stmt.executeUpdate(sql);
 	    		loadUsers(null);
@@ -203,6 +226,8 @@ public class AdminDashboardController implements Initializable {
 		userPasswordColm.setCellValueFactory(new PropertyValueFactory<User, String>("userPassword"));
 		firstnameColm.setCellValueFactory(new PropertyValueFactory<User, String>("userFirstName"));
 		lastnameColm.setCellValueFactory(new PropertyValueFactory<User, String>("userLastName"));
+		Birthdate.setCellValueFactory(new PropertyValueFactory<User, String>("userBirthdate"));
+		contactColm.setCellValueFactory(new PropertyValueFactory<User, String>("userBirthdate"));
 		
 //		UsersTable.setItems(initialData()); // Adds the initial data
 		try {

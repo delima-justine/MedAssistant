@@ -55,6 +55,40 @@ public class PatientSceneController implements Initializable {
 		stage.show();
     }
     
+    public void switchToViewAppointments(ActionEvent event) throws IOException, SQLException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("patientDashboard2.fxml"));
+	    root = loader.load();
+
+	    PatientSceneController2 controller = loader.getController();
+	    controller.loadPatientAppointments(null);
+
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setTitle("Staff Dashboard");
+	    stage.setScene(scene);
+	    stage.centerOnScreen();
+	    stage.show();
+    }
+    
+    public void switchToViewMedicalRecords(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("patientDashboard3.fxml"));
+	    root = loader.load();
+	    
+	    PatientSceneController3 controller = loader.getController();
+	    try {
+			controller.loadMedicalRecords(null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    scene = new Scene(root);
+	    stage.setTitle("Staff Dashboard");
+	    stage.setScene(scene);
+	    stage.centerOnScreen();
+	    stage.show();
+    }
+    
     public void loadInformation(ActionEvent event) throws SQLException {
     	try(Connection conn = MedAssistantDB.getConnection()) {
     		Statement stmt = conn.createStatement();

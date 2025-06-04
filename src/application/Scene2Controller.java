@@ -157,6 +157,17 @@ public class Scene2Controller implements Initializable {
 				case "Staff":
 					fxml_scene = "staffDashboard.fxml";
 					scene_title = "Staff Dashboard";
+					
+					// Dynamic change of scenes based on the role selected of user.
+					FXMLLoader loader3 = new FXMLLoader(getClass().getResource(fxml_scene));
+					root = loader3.load();
+					
+					stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+					scene = new Scene(root);
+					stage.setTitle(scene_title);
+					stage.setScene(scene);
+					stage.centerOnScreen();
+					stage.show();
 					break;
 			}	
 		}

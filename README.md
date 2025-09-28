@@ -22,7 +22,6 @@ an efficient and secure healthcare management system to provide quality service.
 ![SSMS](https://img.shields.io/badge/-SQL%20Server%20Management%20Studio-ffb445?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
 
 -----
-<br>
 
 ## 🧑‍💻 Contributors (Team) 👩‍💻:
 
